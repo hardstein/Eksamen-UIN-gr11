@@ -1,7 +1,5 @@
 // Start koding lengre ned (ved startHere)
 
-const g = "GG";
-const test ="test ingvild";
 
 
 const failColor = "rgb(226, 101, 91)";
