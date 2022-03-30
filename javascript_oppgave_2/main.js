@@ -1,4 +1,5 @@
 // Start koding lengre ned (ved startHere)
+const test ="test ingvild"
 
 const failColor = "rgb(226, 101, 91)";
 const correctColor = "rgb(25, 232, 168)";
