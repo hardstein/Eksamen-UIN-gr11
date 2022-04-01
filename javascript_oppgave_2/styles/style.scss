@@ -1,0 +1,80 @@
+@import 'reset.scss';
+
+:root {
+  --green: rgb(25, 232, 168);
+  --purple: rgb(198, 165, 230);
+  --blue: rgb(125, 227, 240);
+  --red: rgb(226, 101, 91);
+  --input: rgb(244, 244, 244);
+  --input-border: rgb(211, 211, 211);
+  --grey: rgb(183, 183, 183);
+  --text: rgb(41, 41, 41);
+  --box-border: rgb(23, 23, 23);
+  --box-border-width: 3px;
+  --box-shadow: 0 6px 12px rgba(0, 0, 0, 0.16);
+  --background: rgb(34, 114, 139);
+  --white: #ffffff;
+
+  --br-med: 8px;
+}
+
+html {
+  font-size: 62.5%;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
+
+/* Start styling her */
+
+html {
+  background-color: var(--background);
+}
+
+main {
+  display: grid;
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+}
+
+button {
+  margin-top: 2rem;
+  background-color: var(--white);
+  border: 2px solid var(--input-border);
+  padding: 1rem 2rem;
+  width: 100%;
+  text-align: center;
+  font-weight: 600;
+  border-radius: var(--br-med);
+  box-shadow: var(--box-shadow);
+  &:hover {
+    cursor: pointer;
+    opacity: 0.9;
+  }
+}
+
+li {
+  margin: 1rem 0;
+  display: grid;
+  grid-template-columns: 20% auto;
+  gap: 1rem;
+  font-size: 2.2rem;
+  input {
+    text-align: center;
+    padding: 1rem;
+    background-color: var(--white);
+    border: 2px solid var(--input-border);
+    border-radius: var(--br-med);
+    box-shadow: var(--box-shadow);
+  }
+  span {
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    background-color: #ffffff;
+    border-radius: var(--br-med);
+    border: 2px solid var(--input-border);
+    box-shadow: var(--box-shadow);
+  }
+}
