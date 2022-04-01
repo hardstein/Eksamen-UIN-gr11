@@ -46,6 +46,8 @@ const sectionThree = document.getElementById("step_three");
 
 const error = document.querySelectorAll(".error");
 
+const schema = document.getElementsByTagName("main");
+
 navSteps.forEach((step) => {
   navStep.push(step);
 });
@@ -126,8 +128,8 @@ const valdiation = () => {
     }
   } else if (step == 3) {
     if (inpAge > 20) {
-      // nextStep();
-      btnNext.hidden = false;
+      nextStep();
+      // btnNext.hidden = false;
       // (btnSend.hidden = true);
       error.item(`${step - 1}`).hidden = true;
     } else {
