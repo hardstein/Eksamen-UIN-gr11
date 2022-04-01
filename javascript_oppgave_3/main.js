@@ -31,4 +31,110 @@
  */
 
 // #### START HER ####
-const startHere = "Her kommer din kode";
+let step = 1;
+let navStep = [];
+let errors = [];
+
+const btnNext = document.getElementById("next");
+const btnPrev = document.getElementById("prev");
+const btnSend = document.getElementById("send");
+const navSteps = document.querySelectorAll(".step");
+
+const sectionOne = document.getElementById("step_one");
+const sectionTwo = document.getElementById("step_two");
+const sectionThree = document.getElementById("step_three");
+
+const error = document.querySelectorAll(".error");
+
+navSteps.forEach((step) => {
+  navStep.push(step);
+});
+
+const nextStep = () => {
+  if (step < 3) {
+    step++;
+    console.log(step);
+    showPrev();
+    handleActiveNav();
+    displaySection();
+    if (step == 3) {
+      btnNext.hidden = true;
+      btnSend.hidden = false;
+    }
+  }
+};
+
+const prevStep = () => {
+  btnNext.hidden = false;
+  btnSend.hidden = true;
+
+  // if (step > 1) {
+  step--;
+  console.log(step);
+  showPrev();
+  handleActiveNav();
+  displaySection();
+  // }
+};
+
+const showPrev = () => {
+  if (step > 1) {
+    btnPrev.hidden = false;
+  } else {
+    btnPrev.hidden = true;
+  }
+};
+
+const handleActiveNav = () => {
+  navStep.forEach((nav) => {
+    nav.classList.contains("active") && nav.classList.remove("active");
+  });
+
+  navStep[step - 1].classList.add("active");
+};
+
+const displaySection = () => {
+  sectionOne.hidden && step == 1
+    ? (sectionOne.hidden = false)
+    : (sectionOne.hidden = true);
+  sectionTwo.hidden && step == 2
+    ? (sectionTwo.hidden = false)
+    : (sectionTwo.hidden = true);
+  sectionThree.hidden && step == 3
+    ? (sectionThree.hidden = false)
+    : (sectionThree.hidden = true);
+};
+
+const valdiation = () => {
+  const inpName = document.getElementById("name").value;
+  const inpEmail = document.getElementById("email").value;
+  const inpAge = document.getElementById("age").value;
+
+  if (step == 1) {
+    if (inpName.length > 10) {
+      nextStep();
+      error.item(`${step - 1}`).hidden = true;
+    } else {
+      error.item(`${step - 1}`).hidden = false;
+    }
+  } else if (step == 2) {
+    if (inpEmail.includes("@")) {
+      nextStep();
+      error.item(`${step - 1}`).hidden = true;
+    } else {
+      error.item(`${step - 1}`).hidden = false;
+    }
+  } else if (step == 3) {
+    if (inpAge > 20) {
+      // nextStep();
+      btnNext.hidden = false;
+      // (btnSend.hidden = true);
+      error.item(`${step - 1}`).hidden = true;
+    } else {
+      error.item(`${step - 1}`).hidden = false;
+    }
+  }
+};
+
+btnNext.addEventListener("click", valdiation);
+btnPrev.addEventListener("click", prevStep);

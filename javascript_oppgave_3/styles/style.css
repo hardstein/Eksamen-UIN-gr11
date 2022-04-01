@@ -1,0 +1,124 @@
+@import 'reset.css';
+
+/* Start styling under denne kommentaren */
+
+:root {
+  --green: rgb(25, 232, 168);
+  --purple: rgb(198, 165, 230);
+  --blue: rgb(125, 227, 240);
+  --red: rgb(226, 101, 91);
+  --input: rgb(244, 244, 244);
+  --input-border: rgb(211, 211, 211);
+  --grey: rgb(183, 183, 183);
+  --light-grey: rgb(238, 238, 238);
+  --text: rgb(41, 41, 41);
+  --box-border: rgb(23, 23, 23);
+  --box-border-width: 3px;
+  --box-shadow: 0 6px 12px rgba(0, 0, 0, 0.16);
+  --background: rgb(34, 114, 139);
+  --white: #ffffff;
+
+  --br-8: 8px;
+}
+
+html {
+  background-color: var(--white);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+main {
+  margin: 0;
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
+  font-size: 1.6rem;
+}
+
+main > div {
+  width: 40%;
+}
+
+input {
+  border: 1px solid var(--input-border);
+  font-size: inherit;
+}
+
+#next {
+  background-color: var(--green);
+}
+
+#prev {
+  background-color: var(--purple);
+}
+
+#send {
+  background-color: var(--blue);
+}
+
+
+nav ul {
+  display: flex;
+  gap: 1rem;
+}
+
+.step {
+  padding: 1rem 1.5rem;
+  background-color: var(--light-grey);
+  border-radius: var(--br-8);
+  font-weight: 700;
+  text-align: center;
+}
+
+.active {
+  background-color: var(--green);
+}
+
+form {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+section label input{
+  display: block;
+  width: 100%;
+}
+
+input {
+  padding: 1rem;
+  border-radius: var(--br-8);
+  border: 2px solid var(--input-border);
+  background-color: var(--light-grey);
+}
+
+#buttons {
+  display: flex;
+}
+
+button {
+  padding: 1rem 2.5rem;
+  border-radius: var(--br-8);
+}
+
+#prev {
+  margin-right: auto;
+}
+
+#next{
+  margin-left: auto;
+}
+
+#send {
+  position: absolute;
+  right: 30%;
+  margin-top: 2rem;
+}
+
+.error {
+  color: var(--red);
+  font-size: 1.5rem;
+}
+
+button:hover {
+  cursor: pointer;
+  opacity: 0.8;
+}

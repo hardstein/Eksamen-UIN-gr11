@@ -59,13 +59,13 @@ meter {
 }
 
 /* fix the feature of 'hidden' attribute.
-   display:revert; revert to element instead of attribute */
+     display:revert; revert to element instead of attribute */
 :where([hidden]) {
   display: none;
 }
 
 /* revert for bug in Chromium browsers
-   - fix for the content editable attribute will work properly. */
+     - fix for the content editable attribute will work properly. */
 :where([contenteditable]) {
   -moz-user-modify: read-write;
   -webkit-user-modify: read-write;
@@ -76,38 +76,4 @@ meter {
 /* apply back the draggable feature - exist only in Chromium and Safari */
 :where([draggable="true"]) {
   -webkit-user-drag: element;
-}
-
-/* Start styling under denne kommentaren */
-
-:root {
-  --green: rgb(25, 232, 168);
-  --purple: rgb(198, 165, 230);
-  --blue: rgb(125, 227, 240);
-  --red: rgb(226, 101, 91);
-  --input: rgb(244, 244, 244);
-  --input-border: rgb(211, 211, 211);
-  --grey: rgb(183, 183, 183);
-  --text: rgb(41, 41, 41);
-  --box-border: rgb(23, 23, 23);
-  --box-border-width: 3px;
-  --box-shadow: 0 6px 12px rgba(0, 0, 0, 0.16);
-  --background: rgb(34, 114, 139);
-  --white: #ffffff;
-}
-
-input {
-  border: 1px solid var(--input-border)
-}
-
-#next {
-  background-color: var(--green);
-}
-
-#prev {
-  background-color: var(--purple);
-}
-
-#send {
-  background-color: var(--blue);
 }
