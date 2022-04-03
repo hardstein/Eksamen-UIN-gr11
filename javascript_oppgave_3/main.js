@@ -46,7 +46,6 @@ const sectionThree = document.getElementById("step_three");
 
 const error = document.querySelectorAll(".error");
 
-const schema = document.getElementsByTagName("main");
 
 navSteps.forEach((step) => {
   navStep.push(step);
@@ -113,7 +112,7 @@ const valdiation = () => {
   const inpAge = document.getElementById("age").value;
 
   if (step == 1) {
-    if (inpName.length > 10) {
+    if (inpName.length > 10 && inpName.includes(" ")) {
       nextStep();
       error.item(`${step - 1}`).hidden = true;
     } else {
@@ -138,5 +137,17 @@ const valdiation = () => {
   }
 };
 
+const completedForm = (e) => {
+  e.preventDefault();
+  const title = document.createElement("h1");
+  const text = document.createTextNode("Takk ditt skjema er sendt");
+  title.appendChild(text);
+  const schema = document.getElementsByTagName("div");
+  schema.item(0).hidden = true;
+  const body = document.getElementsByTagName("main");
+  body.item(0).appendChild(title);
+}
+
 btnNext.addEventListener("click", valdiation);
 btnPrev.addEventListener("click", prevStep);
+btnSend.addEventListener("click", completedForm);
