@@ -41,7 +41,7 @@ const spans = document.getElementsByTagName("span");
 const btnTest = document.getElementById("test");
 
 let fourWords = [];
-let correct = [];
+let correctFourWords = [];
 
 const wrong = () => {
   btnTest.style.backgroundColor = failColor;
@@ -51,19 +51,34 @@ const wrong = () => {
 const next = () => {
   btnTest.style.backgroundColor = correctColor;
   btnTest.innerHTML = correctText;
-  // FALSK STOPP
-  setTimeout(() => {genereateWords()}, 2000);
-  // btnTest.addEventListener("click", genereateWords);
-  // genereateWords();
+  btnTest.removeEventListener("click", validate);
+  btnTest.addEventListener("click", generateWords);
 };
 
-const genereateWords = () => {
-  btnTest.style.backgroundColor = "var(--white)";
-  btnTest.innerHTML = "Test";
-  fourWords = [];
-  correct = [];
+const generateWords = () => {
+
+  if (btnTest.value = correctText) {
+    // Reset -----
+    btnTest.style.backgroundColor = "var(--white)";
+    btnTest.innerHTML = "Test";
+    for (let i = 0; i < inpText.length; i++) {
+      console.log((inpText[i].value = ""));
+    }
+    fourWords = [];
+    correctFourWords = [];
+    btnTest.removeEventListener("click", generateWords);
+    btnTest.addEventListener("click", validate);
+    // ------------
+  }
+
   for (let i = 0; i < 4; i++) {
     var randomWord = Math.floor(Math.random() * wordList.length);
+
+    // Hvis et ord allerede finnes så lager den et nytt tall og legger til orden fra den indeksen.
+    if (fourWords.includes(wordList[randomWord])) {
+      randomWord = Math.floor(Math.random() * wordList.length);
+    }
+
     fourWords.push(wordList[randomWord]);
     spans[i].innerHTML = wordList[randomWord];
   }
@@ -73,8 +88,8 @@ const genereateWords = () => {
 
 const checkOrder = () => {
   let copyFourWords = fourWords.slice();
-  correct = copyFourWords.sort();
-  console.log("Sortet: ", correct);
+  correctFourWords = copyFourWords.sort();
+  console.log("Sortet: ", correctFourWords);
 };
 
 const validate = () => {
@@ -97,7 +112,7 @@ const validate = () => {
     }
 
     // Hvis ikke alle er rett
-    if (correct.indexOf(fourWords[i]) != inpTextToArray[i].value - 1) {
+    if (correctFourWords.indexOf(fourWords[i]) != inpTextToArray[i].value - 1) {
       result = false;
     }
   }
@@ -108,7 +123,7 @@ const validate = () => {
 };
 
 window.onload = function () {
-  genereateWords();
+  generateWords();
 };
 
 btnTest.addEventListener("click", validate);
