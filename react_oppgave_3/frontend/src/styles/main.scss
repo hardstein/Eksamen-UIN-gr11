@@ -1,8 +1,7 @@
 @import 'reset.scss';
 
-
 html {
-  font-size: 62.5%;
+  background-color: white;
 }
 
 body {
@@ -17,4 +16,25 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+nav {
+  display: flex;
+  font-size: 1rem;
+  background-color: yellowgreen;
+  ul {
+    list-style: none;
+    display: flex;
+    margin-left: auto;
+  }
+  a {
+    text-decoration: none;
+    color: black;
+    font-size: 2rem;
+    margin: 1rem;
+  }
+}
+
+.layout {
+  background-color: rgb(155, 0, 0);
 }
