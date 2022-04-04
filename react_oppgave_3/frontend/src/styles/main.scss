@@ -1,7 +1,27 @@
 @import 'reset.scss';
 
+:root {
+  --green: rgb(25, 232, 168);
+  --dark-green: rgb(67, 150, 107);
+  --purple: rgb(198, 165, 230);
+  --blue: rgb(125, 227, 240);
+  --red: rgb(226, 101, 91);
+  --input: rgb(244, 244, 244);
+  --input-border: rgb(211, 211, 211);
+  --grey: rgb(183, 183, 183);
+  --light-grey: rgb(238, 238, 238);
+  --text: rgb(41, 41, 41);
+  --box-border: rgb(23, 23, 23);
+  --box-border-width: 3px;
+  --box-shadow: 0 6px 12px rgba(0, 0, 0, 0.16);
+  --background: rgb(34, 114, 139);
+  --white: #ffffff;
+  --br-8: 8px;
+  --br-4: 4px;
+}
+
 html {
-  background-color: white;
+  background-color: var(--white);
 }
 
 body {
@@ -11,6 +31,13 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  color: var(--text);
+}
+
+#root {
+  display: grid;
+  height: 100vh;
+  grid-template-rows: auto 1fr auto;
 }
 
 code {
@@ -18,23 +45,116 @@ code {
     monospace;
 }
 
+h1 {
+  font-size: 1.8rem;
+}
+
+h2 {
+  font-size: 1.5rem;
+}
+
+p {
+  font-size: 1.3rem;
+}
+
 nav {
   display: flex;
-  font-size: 1rem;
-  background-color: yellowgreen;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
   ul {
     list-style: none;
     display: flex;
     margin-left: auto;
+    a {
+      margin-left: 2rem;
+    }
   }
   a {
     text-decoration: none;
-    color: black;
-    font-size: 2rem;
-    margin: 1rem;
+    color: inherit;
+    text-shadow: var(--box-shadow);
+  }
+
+  h1, a {
+    font-size: 1.3rem;
   }
 }
 
-.layout {
-  background-color: rgb(155, 0, 0);
+section {
+  display: grid;
+  margin: 0.5rem;
+}
+
+form > label {
+  display: block;
+  margin-top: 1rem;
+
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  input {
+    display: block;
+    border-radius: var(--br-4);
+    padding: 0.5rem;
+    border: 1px solid var(--text);
+    opacity: 0.8;
+    min-width: 80%;
+  }
+  #admin {
+    min-width: auto;
+  }
+  input,
+  #admin {
+    margin-top: 0.3rem;
+  }
+}
+
+.layout > section:nth-child(1) > form:nth-child(2) > label:nth-child(3) {
+  display: flex;
+}
+
+button {
+  padding: 0.7rem 2.1rem;
+  border-radius: var(--br-8);
+  background-color: var(--dark-green);
+  color: var(--white);
+  border: none;
+  box-shadow: var(--box-shadow);
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+
+  &:hover {
+    cursor: pointer;
+    opacity: 0.8;
+  }
+}
+
+footer {
+  display: flex;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+
+  :nth-child(1) {
+    margin-right: auto;
+  }
+}
+
+@media screen and (min-width: 600px) {
+  body {
+    max-width: 60rem;
+    margin: 0 auto;
+  }
+
+  main {
+  }
+
+  section {
+    width: 65%;
+    margin: 0 auto;
+  }
+
+  nav {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+  }
+
+  a {
+  }
 }

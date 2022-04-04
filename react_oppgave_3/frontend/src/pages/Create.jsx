@@ -1,6 +1,9 @@
 function Create() {
   return (
-    <div>Create</div>
+    <div>
+      <h1>Lag nytt kurs</h1>
+      <p>Kommer i webapplikasjoner 2022.</p>
+    </div>
   )
 }
 

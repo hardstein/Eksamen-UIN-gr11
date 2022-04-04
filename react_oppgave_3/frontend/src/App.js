@@ -6,12 +6,10 @@ export default function App() {
   // TODO: Add nøvendig logikk
 
   return (
-    <div data-testid="layout">
+    <>
       <Navbar />
-      <main className="h-full">
-        <RouterPage />
-      </main>
+      <RouterPage />
       <Footer />
-    </div>
+    </>
   )
 }
