@@ -11,9 +11,14 @@ function RouterPage() {
     <Routes>
       <Route element={<Layout />}>
         <Route index element={<SignUp />} />
+        {/* <Route path="kurs" element={<Courses />}> */}
         <Route path="kurs">
           <Route index element={<Courses />} />
-          <Route path=":slug" element={<Course />} />
+          <Route path=":slug" element={<Course />}>
+            <Route path=':slug'>
+              
+            </Route>
+          </Route>
         </Route>
         <Route path="ny" element={<Create />} />
       </Route>
