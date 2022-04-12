@@ -28,26 +28,24 @@ export default function Course() {
   ))
 
   // /kurs/kurs-slug
-
   const generateCourseContent = currentCourse.map((c) => (
     <div key={c.id}>
-      <h1>slug : {slug}</h1>
       <h2 data-testid="course_title">{c.title}</h2>
       <p data-testid="course_description">{c.description}</p>
     </div>
   ))
 
-  // const lesson = courses.find((lesson) => lesson.slug === slug);
-  // const lesson = currentCourse.find((lesson) => lesson.slug === slug)
-  const [lessonText, setLessonText] = useState('');
+  // /kurs/kurs-slug/leksjons-slug
   const generateLessonContent = currentCourse.map((c) => (
     <div key={c.id}>
       <Link to={url}>Tilbake til {c.title}</Link>
       <h1>{c.lessons.find((lesson) => lesson.slug === slug)?.title}</h1>
       <p>{c.lessons.find((lesson) => lesson.slug === slug)?.preAmble}</p>
-      {(c.lessons.find((lesson) => lesson.slug === slug)?.text)?.map((l) =>
-        <p key={l?.id}>{l?.text}</p>
-      )}
+      {c.lessons
+        .find((lesson) => lesson.slug === slug)
+        ?.text?.map((l) => (
+          <p key={l?.id}>{l?.text}</p>
+        ))}
     </div>
   ))
 
@@ -64,11 +62,9 @@ export default function Course() {
       </aside>
       <section>
         {/* TODO: START - Vis kun om vi er på /kurs/kurs-slug ikke når vi er på /kurs/kurs-slug/leksjons-slug */}
-        {
-          url === '/kurs/' + slug
-            ? generateCourseContent
-            : generateLessonContent
-        }
+        {url === '/kurs/' + slug
+          ? generateCourseContent
+          : generateLessonContent}
         {/* TODO: SLUTT */}
         {/* TODO: Vis leksjonens innhold her. HINT: Sjekk React Router Outlet */}
       </section>
