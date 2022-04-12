@@ -240,6 +240,19 @@ footer {
   }
 }
 
+.comment {
+  margin-top: 1rem;
+  :nth-child(1) {
+    font-weight: 600;
+  }
+  border: 1px solid var(--grey);
+  border-radius: var(--br-4);
+  padding: 1rem;
+  p {
+    margin-top: 0 !important;
+  }
+}
+
 .grid-3 > aside:nth-child(1) {
   border-right: 1px solid var(--grey);
 }

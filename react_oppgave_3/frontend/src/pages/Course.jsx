@@ -1,5 +1,5 @@
 import LessonsElement from '../components/LessonsElement'
-import { courses, users } from '../data/data'
+import { comments, courses, users } from '../data/data'
 import { Outlet, useParams, Link } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 
@@ -8,8 +8,9 @@ export default function Course() {
   const { slug } = useParams()
   const [currentCourse, setCurrentCourse] = useState([])
   const [url, setUrl] = useState('/kurs/' + slug)
-  // Finner objektet som har lik slug som slug param.
+
   useEffect(() => {
+    // Finner objektet som har lik slug som slug param.
     const filterCourses = () =>
       courses.filter((c) => {
         return c.slug === slug
@@ -46,6 +47,31 @@ export default function Course() {
         ?.text?.map((l) => (
           <p key={l?.id}>{l?.text}</p>
         ))}
+      {/* The form for commenting a lesson */}
+      <form key={c.id} action="">
+        <label htmlFor="namr">
+          <input type="text" />
+          Navn*
+        </label>
+        <label htmlFor="comment">
+          <input type="text" />
+          Tekst*
+        </label>
+        {/* <input type="button" value="Legg til kommentar" /> */}
+        <button type="submit">Legg til kommentar</button>
+        <p>{c.lesson?.slug}</p>
+      </form>
+      {/* All comments for a specific lesson */}
+      <div>
+        {comments
+          .filter((c) => c?.lesson?.slug === slug)
+          .map((c) => (
+            <div key={c?.id} className="comment">
+              <p>{c?.createdBy.name}</p>
+              <p>{c?.comment}</p>
+            </div>
+          ))}
+      </div>
     </div>
   ))
 
@@ -62,9 +88,11 @@ export default function Course() {
       </aside>
       <section>
         {/* TODO: START - Vis kun om vi er på /kurs/kurs-slug ikke når vi er på /kurs/kurs-slug/leksjons-slug */}
-        {url === '/kurs/' + slug
-          ? generateCourseContent
-          : generateLessonContent}
+        {url === '/kurs/' + slug ? (
+          generateCourseContent
+        ) : (
+          <>{generateLessonContent}</>
+        )}
         {/* TODO: SLUTT */}
         {/* TODO: Vis leksjonens innhold her. HINT: Sjekk React Router Outlet */}
       </section>
