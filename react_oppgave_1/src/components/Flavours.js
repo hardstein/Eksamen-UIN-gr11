@@ -1,5 +1,12 @@
-export default function Flavours() {
-  // const flavourList = [Jordbær, Banan, Lime, Blåbær, Sjokolade]
+export default function Flavours({ }) {
+
+  const flavourList = [
+  {value: "strawberry", name: "Jordbær"},
+  {value: "banana", name: "Banan"}, 
+  {value: "lime", name: "Lime" },
+  {value: "blueberry", name: "Blåbær" },
+  {value: "chocolate", name: "Sjokolade"}]
+
 
   return (
     // Usikker på om section med id-options skal ligge her, lå oppr. i App MELLOM Layout og Flavours
@@ -7,24 +14,9 @@ export default function Flavours() {
       <div className="option" data-testid="flavours" id="flavours">
         <label htmlFor="flavour">
           <select defaultValue="chocolate" id="flavour" data-testid="flavour">
-            {/* {flavourList?.map((flavour) => ( */}
-            {/* <option key={flavour.name}></option> */}
-
-            <option data-testid="option" value="strawberry">
-              Jordbær
-            </option>
-            <option data-testid="option" value="banana">
-              Banan
-            </option>
-            <option data-testid="option" value="lime">
-              Lime
-            </option>
-            <option data-testid="option" value="blueberry">
-              Blåbær
-            </option>
-            <option data-testid="option" value="chocolate">
-              Sjokolade
-            </option>
+            {flavourList?.map((flavour) => (
+            <option data-testid="option" key={flavour.value}>{flavour.name}</option>
+            ))}
           </select>
         </label>
       </div>
