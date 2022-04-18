@@ -1,10 +1,5 @@
 export default function Flavours({ flavourList, handleFlavourChange}) {
-
-  
-
-
   return (
-    // Usikker på om section med id-options skal ligge her, lå oppr. i App MELLOM Layout og Flavours
     <section id="options" data-testid="options">
       <div className="option" data-testid="flavours" id="flavours">
         <label htmlFor="flavour">

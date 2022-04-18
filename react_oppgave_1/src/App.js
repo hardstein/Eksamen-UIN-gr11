@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Flavours from './components/Flavours'
 import IceCream from './components/IceCream'
 import Layout from './components/Layout'
@@ -15,13 +15,6 @@ export default function App() {
 
   // const result = flavourList.find(({ value }) => value === 'value')
 
-  // const title = 'Sjokolade'
-
-  // const getObject = () => (
-  // {flavourList.map(({value, name}) => `${value} ${name}`)}
-  // )
-
-
   const [title, setTitle] = useState([])
 
   // TODO: Gjør nødvendige endringer slik at 'Chocolate' vise i tittel når applikasjonen starter
@@ -29,6 +22,26 @@ export default function App() {
 
   // TODO: Gjør nødvendige endringer slik at bakgrunnen på isen er chocolate når applikasjonen starter
   const [css, setCss] = useState('')
+
+  useEffect(() => {
+    const getChocolate = () => {
+      const chocolateValue = flavourList.find(
+        (iceCream) => iceCream.value === 'chocolate'
+      )
+      console.log(chocolateValue.value)
+      setFlavour(chocolateValue.value)
+      setTitle(chocolateValue.name)
+    }
+    getChocolate()
+  }, [])
+
+  // Forslag til egen funksjon for å hente ut value
+  // const getTitle = () => {
+  //   const chocolateValue = flavourList.find(
+  //     (iceCream) => iceCream.value === 'chocolate'
+  //   )
+  //   return chocolateValue
+  // }
 
   const handleFlavourChange = (event) => {
     const { value } = event.target
