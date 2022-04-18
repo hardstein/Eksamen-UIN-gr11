@@ -5,22 +5,37 @@ import Layout from './components/Layout'
 import Title from './components/Title'
 
 export default function App() {
+  const flavourList = [
+    { value: 'strawberry', name: 'Jordbær' },
+    { value: 'banana', name: 'Banan' },
+    { value: 'lime', name: 'Lime' },
+    { value: 'blueberry', name: 'Blåbær' },
+    { value: 'chocolate', name: 'Sjokolade' },
+  ]
+
+  // const result = flavourList.find(({ value }) => value === 'value')
+
+  // const title = 'Sjokolade'
+
+  // const getObject = () => (
+  // {flavourList.map(({value, name}) => `${value} ${name}`)}
+  // )
+
+
+  const [title, setTitle] = useState([])
+
   // TODO: Gjør nødvendige endringer slik at 'Chocolate' vise i tittel når applikasjonen starter
   const [flavour, setFlavour] = useState('')
 
   // TODO: Gjør nødvendige endringer slik at bakgrunnen på isen er chocolate når applikasjonen starter
   const [css, setCss] = useState('')
 
-  // TODO: Trigg funksjonen under ved endring i select
   const handleFlavourChange = (event) => {
-    // const { value } = event.target.value
-    setFlavour(event.target)
-    console.log(flavour)
-  
-
-
-    // TODO: Gjør nødvendig endring slik at tittel blir oppdatert med verdien valgt i select
-    // setFlavour('')
+    const { value } = event.target
+    setFlavour(value)
+    const iceFlavour = flavourList.find((iceCream) => iceCream.value === value)
+    /* Find er fra Moderne Javascript leksjon 12. Bytte ut med noe annet for å få sjokolade til å vises første load? */
+    setTitle(iceFlavour.name)
 
     // #### DO NOT CHANGE -- Ikke gjør endringer på koden under
     const cssFlavour = getComputedStyle(
@@ -37,9 +52,12 @@ export default function App() {
 
   return (
     <Layout>
-      <Title />
-      <Flavours onChange={handleFlavourChange} />
-      <IceCream />
+      <Title title={title} />
+      <Flavours
+        flavourList={flavourList}
+        handleFlavourChange={handleFlavourChange}
+      />
+      <IceCream css={css} /> {/* TODO:Fikse denne, nå gjør den ingenting */}
     </Layout>
   )
 }
