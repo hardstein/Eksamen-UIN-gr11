@@ -15,12 +15,10 @@ export default function App() {
 
   // const result = flavourList.find(({ value }) => value === 'value')
 
-  const [title, setTitle] = useState([])
+  const [title, setTitle] = useState('')
 
-  // TODO: Gjør nødvendige endringer slik at 'Chocolate' vise i tittel når applikasjonen starter
   const [flavour, setFlavour] = useState('')
 
-  // TODO: Gjør nødvendige endringer slik at bakgrunnen på isen er chocolate når applikasjonen starter
   const [css, setCss] = useState('')
 
   useEffect(() => {
@@ -28,12 +26,11 @@ export default function App() {
       const chocolateValue = flavourList.find(
         (iceCream) => iceCream.value === 'chocolate'
       )
-      console.log(chocolateValue.value)
       setFlavour(chocolateValue.value)
       setTitle(chocolateValue.name)
     }
     getChocolate()
-  }, [])
+  })
 
   // Forslag til egen funksjon for å hente ut value
   // const getTitle = () => {
@@ -47,7 +44,8 @@ export default function App() {
     const { value } = event.target
     setFlavour(value)
     const iceFlavour = flavourList.find((iceCream) => iceCream.value === value)
-    /* Find er fra Moderne Javascript leksjon 12. Bytte ut med noe annet for å få sjokolade til å vises første load? */
+    /* Find funksjonen er fra Moderne Javascript leksjon 12. Bytte ut med noe annet for
+     å få sjokolade til å vises ved første load? */
     setTitle(iceFlavour.name)
 
     // #### DO NOT CHANGE -- Ikke gjør endringer på koden under
@@ -70,7 +68,8 @@ export default function App() {
         flavourList={flavourList}
         handleFlavourChange={handleFlavourChange}
       />
-      <IceCream css={css} /> {/* TODO:Fikse denne, nå gjør den ingenting */}
+      <IceCream css={css} />
+      {/* TODO:Fikse denne, den fungerer uten å sende css som props også.. */}
     </Layout>
   )
 }
