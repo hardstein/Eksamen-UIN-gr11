@@ -106,7 +106,7 @@ const displaySection = () => {
     : (sectionThree.hidden = true);
 };
 
-const valdiation = () => {
+const validation = () => {
   const inpName = document.getElementById("name").value;
   const inpEmail = document.getElementById("email").value;
   const inpAge = document.getElementById("age").value;
@@ -126,7 +126,7 @@ const valdiation = () => {
       error.item(`${step - 1}`).hidden = false;
     }
   } else if (step == 3) {
-    if (inpAge > 20) {
+    if (inpAge > 18) {
       nextStep();
       // btnNext.hidden = false;
       // (btnSend.hidden = true);
@@ -148,6 +148,6 @@ const completedForm = (e) => {
   body.item(0).appendChild(title);
 }
 
-btnNext.addEventListener("click", valdiation);
+btnNext.addEventListener("click", validation);
 btnPrev.addEventListener("click", prevStep);
 btnSend.addEventListener("click", completedForm);
