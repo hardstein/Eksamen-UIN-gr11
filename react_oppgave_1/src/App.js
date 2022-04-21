@@ -30,7 +30,7 @@ export default function App() {
       setTitle(chocolateValue.name)
     }
     getChocolate()
-  })
+  }, [])
 
   // Forslag til egen funksjon for å hente ut value
   // const getTitle = () => {
