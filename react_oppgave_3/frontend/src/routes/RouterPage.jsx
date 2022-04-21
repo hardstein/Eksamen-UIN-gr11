@@ -15,9 +15,7 @@ function RouterPage() {
         <Route path="kurs">
           <Route index element={<Courses />} />
           <Route path=":slug" element={<Course />}>
-            <Route path=':slug'>
-              
-            </Route>
+            <Route path=":slug"></Route>
           </Route>
         </Route>
         <Route path="ny" element={<Create />} />

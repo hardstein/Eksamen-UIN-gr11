@@ -1,7 +1,9 @@
-import LessonsElement from '../components/LessonsElement'
-import { comments, courses, users } from '../data/data'
-import { Outlet, useParams, Link } from 'react-router-dom'
 import { useEffect, useState } from 'react'
+import { Outlet, useParams } from 'react-router-dom'
+import LessonsElement from '../components/LessonsElement'
+import { courses, users } from '../data/data'
+// import LessonComments from '../components/LessonComments'
+import Lesson from '../components/Lesson'
 
 export default function Course() {
   // TODO: Add nøvendig logikk
@@ -38,41 +40,7 @@ export default function Course() {
 
   // /kurs/kurs-slug/leksjons-slug
   const generateLessonContent = currentCourse.map((c) => (
-    <div key={c.id}>
-      <Link to={url}>Tilbake til {c.title}</Link>
-      <h1>{c.lessons.find((lesson) => lesson.slug === slug)?.title}</h1>
-      <p>{c.lessons.find((lesson) => lesson.slug === slug)?.preAmble}</p>
-      {c.lessons
-        .find((lesson) => lesson.slug === slug)
-        ?.text?.map((l) => (
-          <p key={l?.id}>{l?.text}</p>
-        ))}
-      {/* The form for commenting a lesson */}
-      <form key={c.id} action="">
-        <label htmlFor="namr">
-          <input type="text" />
-          Navn*
-        </label>
-        <label htmlFor="comment">
-          <input type="text" />
-          Tekst*
-        </label>
-        {/* <input type="button" value="Legg til kommentar" /> */}
-        <button type="submit">Legg til kommentar</button>
-        <p>{c.lesson?.slug}</p>
-      </form>
-      {/* All comments for a specific lesson */}
-      <div>
-        {comments
-          .filter((c) => c?.lesson?.slug === slug)
-          .map((c) => (
-            <div key={c?.id} className="comment">
-              <p>{c?.createdBy.name}</p>
-              <p>{c?.comment}</p>
-            </div>
-          ))}
-      </div>
-    </div>
+    <Lesson key={c.id} url={url} c={c} slug={slug}/>
   ))
 
   const generateEnrollments = users.map((u) => <li key={u.name}>{u.name}</li>)
@@ -88,13 +56,17 @@ export default function Course() {
       </aside>
       <section>
         {/* TODO: START - Vis kun om vi er på /kurs/kurs-slug ikke når vi er på /kurs/kurs-slug/leksjons-slug */}
+
+        {/* TODO: SLUTT */}
+        {/* TODO: Vis leksjonens innhold her. HINT: Sjekk React Router Outlet */}
         {url === '/kurs/' + slug ? (
           generateCourseContent
         ) : (
-          <>{generateLessonContent}</>
+          generateLessonContent
         )}
-        {/* TODO: SLUTT */}
-        {/* TODO: Vis leksjonens innhold her. HINT: Sjekk React Router Outlet */}
+        <Outlet/>
+        
+
       </section>
       <aside data-testid="enrollments">
         <h3>Deltakere</h3>
