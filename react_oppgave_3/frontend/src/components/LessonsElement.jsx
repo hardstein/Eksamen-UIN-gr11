@@ -1,17 +1,19 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
-function LessonsElement({ l }) {
+function LessonsElement({ url, l }) {
   const lessons = l.lessons
 
   const generate = lessons.map((l) => (
     <li key={l.title}>
-      <a
+      <Link
         data-testid="lesson_url"
         data-slug="Dynamisk verdi"
-        href="#"
+        key={l.title}
+        to={url + '/' + l.slug}
       >
         {l.title}
-      </a>
+      </Link>
     </li>
   ))
   return <>{generate}</>

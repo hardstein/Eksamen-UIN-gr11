@@ -29,7 +29,12 @@ export const courses = [
         slug: 'lokker',
         preAmble:
           'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.',
-        text: [],
+        text: [
+          {
+            id: '1',
+            text: 'Dummy tekst som er lagt til! ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. ',
+          },
+        ],
       },
       {
         id: '3',
@@ -127,8 +132,15 @@ export const comments = [
     id: '2',
     createdBy: { id: '3', name: 'Finn Finnsen' },
     comment:
-      'Dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.',
+      'Dolor sit amet Finn Finnsen, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.',
     lesson: { slug: 'variabler' },
+  },
+  {
+    id: '3',
+    createdBy: { id: '5', name: 'Sturla Simensen' },
+    comment:
+      'Dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.',
+    lesson: { slug: 'lokker' },
   },
 ]
 
@@ -138,6 +150,8 @@ export const courseCreateSteps = [
 ]
 
 export const categories = [
+  // Lagt til 'alle' i denne listen
+  'Alle', 
   'Marketing',
   'Photoshop',
   'Code',

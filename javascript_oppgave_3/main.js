@@ -46,7 +46,6 @@ const sectionThree = document.getElementById("step_three");
 
 const error = document.querySelectorAll(".error");
 
-
 navSteps.forEach((step) => {
   navStep.push(step);
 });
@@ -106,30 +105,23 @@ const displaySection = () => {
     : (sectionThree.hidden = true);
 };
 
-const valdiation = () => {
+const validation = () => {
   const inpName = document.getElementById("name").value;
   const inpEmail = document.getElementById("email").value;
-  const inpAge = document.getElementById("age").value;
 
-  if (step == 1) {
+  if (step === 1) {
     if (inpName.length > 10 && inpName.includes(" ")) {
-      nextStep();
       error.item(`${step - 1}`).hidden = true;
+      nextStep();
     } else {
       error.item(`${step - 1}`).hidden = false;
     }
-  } else if (step == 2) {
+  } else if (step === 2) {
     if (inpEmail.includes("@")) {
-      nextStep();
       error.item(`${step - 1}`).hidden = true;
-    } else {
-      error.item(`${step - 1}`).hidden = false;
-    }
-  } else if (step == 3) {
-    if (inpAge > 20) {
       nextStep();
-      // btnNext.hidden = false;
-      // (btnSend.hidden = true);
+      // Hvis den er tom, som skjer når man kommer til neste step i formen.
+    } else if (inpEmail == " ") {
       error.item(`${step - 1}`).hidden = true;
     } else {
       error.item(`${step - 1}`).hidden = false;
@@ -138,16 +130,25 @@ const valdiation = () => {
 };
 
 const completedForm = (e) => {
+  const inpAge = document.getElementById("age").value;
   e.preventDefault();
-  const title = document.createElement("h1");
-  const text = document.createTextNode("Takk ditt skjema er sendt");
-  title.appendChild(text);
-  const schema = document.getElementsByTagName("div");
-  schema.item(0).hidden = true;
-  const body = document.getElementsByTagName("main");
-  body.item(0).appendChild(title);
-}
 
-btnNext.addEventListener("click", valdiation);
+  if (step === 3 && inpAge >= 18) {
+    error.item(`${step - 1}`).hidden = true;
+
+    const title = document.createElement("h1");
+    const text = document.createTextNode("Takk ditt skjema er sendt");
+    title.appendChild(text);
+    const schema = document.getElementsByTagName("div");
+    schema.item(0).hidden = true;
+    const body = document.getElementsByTagName("main");
+    body.item(0).appendChild(title);
+  } else {
+    error.item(`${step - 1}`).hidden = false;
+  }
+  console.log("inpAge: ", inpAge);
+};
+
+btnNext.addEventListener("click", validation);
 btnPrev.addEventListener("click", prevStep);
 btnSend.addEventListener("click", completedForm);

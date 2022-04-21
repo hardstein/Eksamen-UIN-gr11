@@ -1,31 +1,41 @@
-import { useState } from "react";
-import CourseElement from "../components/CourseElement";
-import { courses } from "../data/data";
+import { useState } from 'react'
+import CourseCard from '../components/CourseCard'
+import Filter from '../components/Filter'
+import { courses } from '../data/data'
+
 export default function Courses() {
   // TODO: Add nøvendig logikk
 
-  const [empty, setEmpty] = useState(false);
+  // const [empty, setEmpty] = useState(false)
+  const [category, setCategory] = useState('alle')
 
-  const generateCourses = courses.map((c, i) => 
-    <CourseElement key={i} c={c} />
-  )
+  // To lower fordi "courses" sin kategori er skrevet med liten bokstav.
+  function handleOptions(e) {
+    setCategory(e.target.value.toLowerCase())
+  }
+
+  const generateCourses = courses
+    .filter((course) => course.category === category)
+    .map((c, i) => <CourseCard key={i} c={c} />)
+
   return (
     <>
       <header className="courses-header">
         <h2 data-testid="title">Alle kurs</h2>
-        <label htmlFor="filter">
-          {empty ? <span>Velg kategori:</span> : null}
-          <select id="filter" name="filter" data-testid="filter">
-            <option value="">Alle</option>
-            {/* TODO: Legg til flere kategorier - sjekk mappen data */}
-          </select>
-        </label>
+        {/* Filter */}
+        <Filter handleOptions={handleOptions} />
       </header>
       <section className="courses-list" data-testid="courses">
         {/* TODO: Vis alle kurs */}
-        {generateCourses}
+        {category === 'alle' ? (
+          courses.map((c, i) => <CourseCard key={i} c={c} />)
+        ) : category === 'empty' ? (
+          <p data-testid="empty">Ingen kurs</p>
+        ) : (
+          // Legge til hvis det ikke er kurs på en gitt kategori
+          generateCourses
+        )}
         {/* TODO: Vis hvis ingen kurs / ingen kurs på en gitt kategori */}
-        {empty ? <p data-testid="empty">Ingen kurs</p> : null}
       </section>
     </>
   )
