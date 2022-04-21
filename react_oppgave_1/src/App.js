@@ -13,40 +13,33 @@ export default function App() {
     { value: 'chocolate', name: 'Sjokolade' },
   ]
 
-  // const result = flavourList.find(({ value }) => value === 'value')
-
-  const [title, setTitle] = useState('')
-
   const [flavour, setFlavour] = useState('')
-
   const [css, setCss] = useState('')
 
-  useEffect(() => {
-    const getChocolate = () => {
-      const chocolateValue = flavourList.find(
-        (iceCream) => iceCream.value === 'chocolate'
-      )
-      setFlavour(chocolateValue.value)
-      setTitle(chocolateValue.name)
-    }
-    getChocolate()
-  }, [])
+  // useEffect(() => {
+  //   const getChocolate = () => {
+  //     const chocolateValue = flavourList.find(
+  //       (iceCream) => iceCream.value === 'chocolate'
+  //     )
+  //     setFlavour(chocolateValue.value)
+  //     setTitle(chocolateValue.name)
+  //   }
+  //   getChocolate()
+  // }, [])
 
-  // Forslag til egen funksjon for å hente ut value
-  // const getTitle = () => {
-  //   const chocolateValue = flavourList.find(
-  //     (iceCream) => iceCream.value === 'chocolate'
-  //   )
-  //   return chocolateValue
-  // }
+  useEffect(() => {
+    const chocolateValue = flavourList.find(
+      (iceCream) => iceCream.value === 'chocolate'
+    )
+    setFlavour(chocolateValue.value)
+    // setTitle(chocolateValue.value)
+    setCss(chocolateValue.value)
+  }, [])
 
   const handleFlavourChange = (event) => {
     const { value } = event.target
     setFlavour(value)
-    const iceFlavour = flavourList.find((iceCream) => iceCream.value === value)
-    /* Find funksjonen er fra Moderne Javascript leksjon 12. Bytte ut med noe annet for
-     å få sjokolade til å vises ved første load? */
-    setTitle(iceFlavour.name)
+    setCss(value)
 
     // #### DO NOT CHANGE -- Ikke gjør endringer på koden under
     const cssFlavour = getComputedStyle(
@@ -63,13 +56,13 @@ export default function App() {
 
   return (
     <Layout>
-      <Title title={title} />
+      <Title css={css} />
       <Flavours
         flavourList={flavourList}
         handleFlavourChange={handleFlavourChange}
       />
       <IceCream css={css} />
-      {/* TODO:Fikse denne, den fungerer uten å sende css som props også.. */}
+      {/* TODO:Fikse denne, den fungerer uten å sende css som props også. Flytte main fra IceCream til App? */}
     </Layout>
   )
 }
