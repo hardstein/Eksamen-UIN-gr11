@@ -261,6 +261,15 @@ footer {
   border-right: 1px solid var(--grey);
 }
 
+// Sign up
+.form-error {
+  color: var(--red);
+}
+
+.form-success {
+  color: var(--green);
+}
+
 @media screen and (min-width: 600px) {
   section {
     margin: 0 auto;

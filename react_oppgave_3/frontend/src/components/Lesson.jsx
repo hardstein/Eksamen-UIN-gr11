@@ -1,9 +1,9 @@
-import { Link } from "react-router-dom";
-import LessonComments from "./LessonComments";
+import { Link } from 'react-router-dom'
+import LessonComments from './LessonComments'
 
-export default function Lesson( {url, c, slug}) {
+export default function Lesson({ url, c, slug }) {
   // TODO: Add nøvendig logikk
-  let currentSlug = slug;
+  let currentSlug = slug
   return (
     <div>
       <div>
@@ -14,17 +14,23 @@ export default function Lesson( {url, c, slug}) {
           Kategori: <span>{c.category}</span>
         </span>
       </div>
-      <h2 data-testid="lesson_title">{c.lessons.find((lesson) => lesson.slug === currentSlug)?.title}</h2>
-      <p data-testid="lesson_preAmble">{c.lessons.find((lesson) => lesson.slug === slug)?.preAmble}</p>
+      <h2 data-testid="lesson_title">
+        {c.lessons.find((lesson) => lesson.slug === currentSlug)?.title}
+      </h2>
+      <p data-testid="lesson_preAmble">
+        {c.lessons.find((lesson) => lesson.slug === slug)?.preAmble}
+      </p>
       {/* TODO: Liste opp tekster */}
       {c.lessons
         .find((lesson) => lesson.slug === slug)
         ?.text?.map((l) => (
-          <p key={l?.id} data-testid="lesson_text">{l?.text}</p>
+          <p key={l?.id} data-testid="lesson_text">
+            {l?.text}
+          </p>
         ))}
-      
-        {/* TODO: Liste opp kommentarer */}
-        <LessonComments slug={currentSlug} />
+
+      {/* TODO: Liste opp kommentarer */}
+      <LessonComments slug={currentSlug} />
     </div>
   )
 }

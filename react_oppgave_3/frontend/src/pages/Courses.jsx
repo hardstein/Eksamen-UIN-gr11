@@ -6,7 +6,6 @@ import { courses } from '../data/data'
 export default function Courses() {
   // TODO: Add nøvendig logikk
 
-  // const [empty, setEmpty] = useState(false)
   const [category, setCategory] = useState('alle')
 
   // To lower fordi "courses" sin kategori er skrevet med liten bokstav.
@@ -29,10 +28,10 @@ export default function Courses() {
         {/* TODO: Vis alle kurs */}
         {category === 'alle' ? (
           courses.map((c, i) => <CourseCard key={i} c={c} />)
-        ) : category === 'empty' ? (
+        ) : // Hvis empty er valgt, eller at det mangler kurs til valgt kategori.
+        category === 'empty' || generateCourses.length === 0 ? (
           <p data-testid="empty">Ingen kurs</p>
         ) : (
-          // Legge til hvis det ikke er kurs på en gitt kategori
           generateCourses
         )}
         {/* TODO: Vis hvis ingen kurs / ingen kurs på en gitt kategori */}
