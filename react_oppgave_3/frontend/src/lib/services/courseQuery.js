@@ -9,6 +9,12 @@ import client from '../client'
 //   lesson,
 // }
 
+// *[_type=="course" && slug.current == "javascript-101"] {
+// //  ...,
+//     title,
+//     "lessonName": lesson[]->title
+// }
+
 const courseFields = `
   title,
   'slug' : slug.current,
@@ -24,11 +30,33 @@ const coursesFields = `
   lesson,
 `
 
+const NEWcourseFields = `
+  ...,
+  title,
+  'slug' : slug.current,
+  category,
+  description,
+  lesson,
+  "lessonName": lesson[]->title,
+  "lessonSlug": lesson[]->slug.current,
+`
+
 export const getCourses = async () => {
   const data = await client.fetch(
     `*[_type == "course" ] {
           ${coursesFields}
       }`
+  )
+  return data
+}
+
+
+export const NEWgetCourse = async (slug) => {
+  const data = await client.fetch(
+    `*[_type == "course" && slug.current == $slug] {
+        ${NEWcourseFields}
+    }`,
+    { slug }
   )
   return data
 }

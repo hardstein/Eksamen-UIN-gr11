@@ -19,12 +19,12 @@ import client from '../client'
 //     'lessonRefs': lesson[]._ref,
 // }
 
-
 const lessonsCourse = `
   //  ...,
   title,
   order,
   preamble,
+  _id,
   "slug" : slug.current,
   "lessonText": text[]{text},
   "relatedCourse":  *[_type=='course' && references(^._id)]{ title, 'slug': slug.current }

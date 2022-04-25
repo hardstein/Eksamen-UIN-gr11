@@ -5,15 +5,17 @@ import LessonsElement from '../components/LessonsElement'
 import { users } from '../data/data'
 // import LessonComments from '../components/LessonComments'
 import Lesson from '../components/Lesson'
-import { getCourse } from '../lib/services/courseQuery'
+// import { getCourse } from '../lib/services/courseQuery'
+import { NEWgetCourse } from '../lib/services/courseQuery'
 import { getLessonCourse } from '../lib/services/lessonQuery'
 
 export default function Course() {
   // TODO: Add nøvendig logikk
   const { slug } = useParams()
   const [currentCourse, setCurrentCourse] = useState([])
-  const [lessons, setLessons] = useState([])
   const [url, setUrl] = useState('/kurs/' + slug)
+  // Lagre IDer som skal brukes til parameter for query i groq...
+  const [id, setId] = useState([])
 
   useEffect(() => {
     // Finner objektet som har lik slug som slug param.
@@ -23,50 +25,35 @@ export default function Course() {
     //   })
 
     const getCourseData = async () => {
-      const course = await getCourse(slug)
-      console.log("course: ", course)
+      // const course = await getCourse(slug)
+      const course = await NEWgetCourse(slug)
+      console.log('course: ', course)
       setCurrentCourse(course)
     }
 
-    const getLessonsData = async () => {
-      const lessonsData = await getLessonCourse()
-      console.log("lessonsData: ", lessonsData)
-      setLessons(lessonsData)
-    }
-    
     getCourseData()
-    getLessonsData()
-    // setCurrentCourse(filterCourses())
-  }, [])
+  }, [slug])
 
   const handleUrl = () => {
     setUrl()
   }
 
-  const generateLessons = currentCourse?.map((l) => (
-    <LessonsElement key={l} url={url} handleUrl={handleUrl} l={l} />
-  ))
+  // for (let i = 0; i < currentCourse?.lessonName.length; i++) {
+  //   console.log(currentCourse?.lessonName[i])
+  // }
+  let lessons = { titles: '', slugs: '' }
+  const handleCourseLsssons = currentCourse?.map((l) =>
+    // <LessonsElement key={l.title} title={l.lessonName[i]} url={url} handleUrl={handleUrl} l={l} />
+    {
+      lessons.titles = l?.lessonName
+      lessons.slugs = l?.lessonSlug
+    }
+  )
+  console.log('lessons ', lessons)
 
-
-  const generateLessonsFiltered = lessons?.map((fl) => 
-      // fl.map((flInner) => (
-      console.log(fl.title)
-    )
-
-    // for (let i = 0; i < lessons.length; i++) {
-    //   // const relatedCourse = 
-    //   lessons[i].map((l) => (
-    //     console.log(l.slug)
-    //   ))
-    // }
-
-  
-  // lessons?.filter((L) => {
-  //   return L?.relatedCourse?.slug === slug
-  // })
-  //   .map((l) => (
-  //   <LessonsElement key={l} url={url} handleUrl={handleUrl} l={l} />
-  // ))
+  const generateLessonsCard = currentCourse?.map((l, i) =>
+    <LessonsElement key={i} url={url} handleUrl={handleUrl} l={l} />
+  )
 
   // /kurs/kurs-slug
   const generateCourseContent = currentCourse?.map((c) => (
@@ -89,13 +76,11 @@ export default function Course() {
         <h3>Leksjoner</h3>
         <ul data-testid="lessons" className="lessons">
           {/* TODO: Vis alle leksjoner til kurset */}
-          {generateLessons}
-          {/* SLETT DEN CLGEN */}
+          {generateLessonsCard}
         </ul>
       </aside>
       <section>
         {/* TODO: START - Vis kun om vi er på /kurs/kurs-slug ikke når vi er på /kurs/kurs-slug/leksjons-slug */}
-      {generateLessonsFiltered}
         {/* TODO: SLUTT */}
         {/* TODO: Vis leksjonens innhold her. HINT: Sjekk React Router Outlet */}
         {url === '/kurs/' + slug

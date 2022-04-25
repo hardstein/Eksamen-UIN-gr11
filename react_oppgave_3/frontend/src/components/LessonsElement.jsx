@@ -2,22 +2,26 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 function LessonsElement({ url, l }) {
-  // const lessons = l.lessons
-  const lessons = l.lesson
+  const names = l.lessonName
+  const slugs = l.lessonSlug
+  // Inspirasjon fra nettet:
+  // https://stackoverflow.com/questions/32937181/javascript-es6-map-multiple-arrays
+  // let zipped = names.map((x, i) => [x, slugs[i]]);
 
-  const generate = lessons?.map((l) => (
-    <li key={l?._key}>
+  // NB: l og le
+  const generate = names?.map((le, i) => (
+    <li key={i}>
       <Link
         data-testid="lesson_url"
         data-slug="Dynamisk verdi"
-        // key={l.title}
-        to={url + '/' + l?.slug}
+        // Fikk ideen til å bruke slugs[i] her fra koden over som er kommentert ut.
+        to={url + '/' + slugs[i]}
       >
-        {/* {l.title} */}
-        {"KEYLUL: " + l?._key}
+        {le}
       </Link>
     </li>
   ))
+
   return <>{generate}</>
 }
 
