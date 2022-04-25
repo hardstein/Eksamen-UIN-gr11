@@ -1,10 +1,16 @@
 // TODO: Nødvendig props
 
-export default function Game() {
+export default function Game({ games }) {
   // TODO: Legge til nødvendig logikk. Hvis nødvendig.
 
   return (
     <div data-testid="game" className="grid grid-cols-4 gap-6">
+      <ul>{games?.map((game) => (
+           <li key={game} value={game.color}>
+        {game.point}</li>
+      ))}
+      </ul>
+      
       {/* TODO: Må skrive ut antall knapper et spill skal vise */}
       {/* TODO: Må bruke riktig komponent og sende data som props */}
       {/* TODO: Kun vise denne knappen når en runde er ferdig */}

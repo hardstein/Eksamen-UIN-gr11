@@ -16,29 +16,16 @@ export default function App() {
   const [flavour, setFlavour] = useState('')
   const [css, setCss] = useState('')
 
-  // useEffect(() => {
-  //   const getChocolate = () => {
-  //     const chocolateValue = flavourList.find(
-  //       (iceCream) => iceCream.value === 'chocolate'
-  //     )
-  //     setFlavour(chocolateValue.value)
-  //     setTitle(chocolateValue.name)
-  //   }
-  //   getChocolate()
-  // }, [])
-
   useEffect(() => {
-    const chocolateValue = flavourList.find(
+    const showChocolate = flavourList?.find(
       (iceCream) => iceCream.value === 'chocolate'
     )
-    setFlavour(chocolateValue.value)
-    setCss(chocolateValue.value)
+    setCss(showChocolate.value)
   }, [])
 
   const handleFlavourChange = (event) => {
     const { value } = event.target
-    setFlavour(value)
-    setCss(value) /* Dobbeltsjekk om ok */
+    // setFlavour(value) Sjekke denne, den gjør egt ikke noe
 
     // #### DO NOT CHANGE -- Ikke gjør endringer på koden under
     const cssFlavour = getComputedStyle(
