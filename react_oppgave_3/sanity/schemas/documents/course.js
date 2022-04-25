@@ -12,7 +12,7 @@ export default {
   fields: [
     {
       type: "string",
-      name: "courseName",
+      name: "title", //Byttet fra courseName
       title: "Navn på kurs",
     },
     {
@@ -20,18 +20,30 @@ export default {
       name: "slug",
       title: "Slug",
       options: {
-        source: "courseName",
+        source: "title",
         slugify: (input) =>
           input.toLowerCase().replace(/\s+/g, "-").slice(0, 200),
       },
       validation: (Rule) => Rule.required(),
     },
+    // {
+    //   name: "lesson",
+    //   title: "Leksjon",
+    //   type: "reference",
+    //   to: [{ type: "lesson" }],
+    // },
     {
       name: "lesson",
       title: "Leksjon",
-      type: "reference",
-      to: [{ type: "lesson" }],
+      type: "array",
+      of: [
+        {
+          type: "reference",
+          to: [{ type: "lesson" }],
+        },
+      ],
     },
+
     {
       type: "text",
       name: "description",

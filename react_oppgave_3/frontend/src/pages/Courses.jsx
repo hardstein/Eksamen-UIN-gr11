@@ -1,10 +1,20 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import CourseCard from '../components/CourseCard'
 import Filter from '../components/Filter'
-import { courses } from '../data/data'
+// import { courses } from '../data/data'
+import { getCourses } from '../lib/services/courseQuery'
 
 export default function Courses() {
   // TODO: Add nøvendig logikk
+  const [courses, setCourses] = useState([])
+  useEffect(() => {
+    const getCoursesData = async () => {
+      const coursesData = await getCourses()
+      setCourses(coursesData)
+    }
+    
+    getCoursesData()
+  }, [])
 
   const [category, setCategory] = useState('alle')
 

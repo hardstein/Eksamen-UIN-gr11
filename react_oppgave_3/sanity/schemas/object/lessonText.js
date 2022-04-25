@@ -4,7 +4,7 @@
 export default {
   type: "object",
   name: "lessonText",
-  title: "Svar",
+  title: "Tekst",
   fields: [
     {
       type: "string",
