@@ -25,7 +25,6 @@ export default function Course() {
     //   })
 
     const getCourseData = async () => {
-      // const course = await getCourse(slug)
       const course = await NEWgetCourse(slug)
       console.log('course: ', course)
       setCurrentCourse(course)
@@ -38,22 +37,10 @@ export default function Course() {
     setUrl()
   }
 
-  // for (let i = 0; i < currentCourse?.lessonName.length; i++) {
-  //   console.log(currentCourse?.lessonName[i])
-  // }
-  let lessons = { titles: '', slugs: '' }
-  const handleCourseLsssons = currentCourse?.map((l) =>
-    // <LessonsElement key={l.title} title={l.lessonName[i]} url={url} handleUrl={handleUrl} l={l} />
-    {
-      lessons.titles = l?.lessonName
-      lessons.slugs = l?.lessonSlug
-    }
-  )
-  console.log('lessons ', lessons)
-
-  const generateLessonsCard = currentCourse?.map((l, i) =>
+  // Leksjoner som blir vist på vestre siden på et kurs. 
+  const generateLessonsCard = currentCourse?.map((l, i) => (
     <LessonsElement key={i} url={url} handleUrl={handleUrl} l={l} />
-  )
+  ))
 
   // /kurs/kurs-slug
   const generateCourseContent = currentCourse?.map((c) => (
@@ -68,6 +55,7 @@ export default function Course() {
     <Lesson key={c?.id} url={url} c={c} slug={slug} />
   ))
 
+  // Liste over deltakere til et kurs, på høyre side.
   const generateEnrollments = users.map((u) => <li key={u?.name}>{u?.name}</li>)
 
   return (
