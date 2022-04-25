@@ -38,7 +38,7 @@ export default function App() {
   const handleFlavourChange = (event) => {
     const { value } = event.target
     setFlavour(value)
-    setCss(value)
+    setCss(value) /* Dobbeltsjekk om ok */
 
     // #### DO NOT CHANGE -- Ikke gjør endringer på koden under
     const cssFlavour = getComputedStyle(
