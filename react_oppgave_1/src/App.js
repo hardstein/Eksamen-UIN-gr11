@@ -32,7 +32,6 @@ export default function App() {
       (iceCream) => iceCream.value === 'chocolate'
     )
     setFlavour(chocolateValue.value)
-    // setTitle(chocolateValue.value)
     setCss(chocolateValue.value)
   }, [])
 
