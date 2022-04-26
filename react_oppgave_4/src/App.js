@@ -78,9 +78,9 @@ export default function App() {
     // console.log('false')}
 
     const { squares } = levels[level]
-    console.log(squares)
+
     const { colors } = levels[level]
-    console.log(colors)
+
     const buttons = []
     for (let i = 0; i < squares; i++) {
       const button = createButton(colors[random(colors.length)])
@@ -112,44 +112,93 @@ export default function App() {
   }
 
   // Koden nedenfor lå opprinnelig her
-  const [game, setGame] = useState([])
+  const [game, setGame] = useState(0) // Opprinnelig sto det null her
 
-  const getGameLevel = async () => {
-    const data = await createGame(0)
-    console.log(data)
-    setGame(data)
-  }
+  const [button, setButton] = useState(0)
+
+  // const getGameLevel = async () => {
+  //   const data = await createGame(0)
+  //   console.log(data)
+  //   setGame(data)
+  // }
 
   // useEffect(() => {
-  //   const getGame = async () => {
-  //     const data = await createGame(0)
+  //   const getGame = () => {
+  //     const data = createGame(game)
   //     console.log(data)
   //   // TODO: 0 må byttes ut med noe dynamisk
-  //   setGame(data)
   //   }
   //   getGame()
-
   // }, [])
 
   // const makeNewGame = () => {
   //   createGame(0).buttons
   // }
 
-  // Object.keys(game).forEach((prop) => console.log(prop))
+  // const getTotal = () => {
+  //   console.log(game?.total)
+  // }
+
+  // const clickFunc = () => {
+  //   setGame((prev) => prev + 1)
+  //   console.log(game)
+  // }
+
+  const clickFunc = () => {
+    const value = createGame(game).buttons[button].color
+    console.log(value)
+  }
+
+  // const square = levels?.[game].squares
+
+  // const clickFunc = () => {
+  //   const square = levels?.[game]?.squares
+  //   console.log(square)
+  // }
+
+  // const clickFunc = async () => {
+  //   const newGame = await createGame(game)
+  //   console.log(levels?.[game]?.squares)
+  // }
+
+  const point = () => {
+    const number = createGame(game).total
+
+    console.log(number)
+  }
+
+  // Sendes til Games. Kan evn istedet sende inn setGame og lage handleNext i Game
+  const handleNext = () => {
+    setGame((prev) => prev + 1)
+  }
 
   return (
     <>
-      {/* {JSON.stringify(createGame(0).buttons[0].point)} */}
-      {/* {JSON.stringify(levels)} */}
+      {/* {JSON.stringify(createGame(game).buttons[button])} */}
+      {/* {JSON.stringify(levels[game]?.squares)} */}
       {/* {JSON.stringify(game?.total)} */}
-      {JSON.stringify(getGameLevel)}
-      <h1>{game?.total}</h1>
+      {/* {JSON.stringify(getGameLevel)} */}
+      {/* {JSON.stringify(createGame[0])} */}
+      {/* {JSON.stringify(game)} */}
+      {JSON.stringify(createGame(game).buttons.point)}
+      {JSON.stringify(point())}
+
       <Header
-        headTotal={createGame(0).total}
-        headPoint={createGame(0).buttons[0].point}
+        headTotal={createGame(game).total}
+        headPoint={createGame(game).buttons[0].point}
       />
-      <BullsEye bull={createGame(2).buttons} />
-      <Game games={createGame(0).buttons} />
+      <BullsEye listOfButtons={createGame(game).buttons} setGame={setGame} />
+      <div>
+        <button type="button" onClick={clickFunc}>
+          Trykk meg
+        </button>
+      </div>
+      <Game
+        games={createGame(game).buttons}
+        handleNext={handleNext}
+        // levels={levels}
+        // squares={}
+      />
     </>
   )
 }

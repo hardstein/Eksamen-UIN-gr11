@@ -25,7 +25,7 @@ export default function App() {
 
   const handleFlavourChange = (event) => {
     const { value } = event.target
-    // setFlavour(value) Sjekke denne, den gjør egt ikke noe
+    setFlavour(value) // Sjekke denne, den gjør egt ikke noe
 
     // #### DO NOT CHANGE -- Ikke gjør endringer på koden under
     const cssFlavour = getComputedStyle(
