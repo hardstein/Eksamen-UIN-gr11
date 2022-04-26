@@ -29,6 +29,12 @@ import client from '../client'
 //   'textText' : text[].text
 // }
 
+// BRUK DENNE
+// *[_type=="comment"] {
+//   ...,
+//    'lessonSlug':lesson->slug.current
+//  }
+
 const lessonsFields = `
   // ...,
   title,

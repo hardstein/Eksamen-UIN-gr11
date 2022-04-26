@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
-import { Link, Outlet, useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import { getLesson } from '../lib/services/lessonQuery'
-import Courses from '../pages/Courses';
+// import Courses from '../pages/Courses';
 import LessonComments from './LessonComments'
 
 export default function Lesson({ url, c, courseSlug }) {
