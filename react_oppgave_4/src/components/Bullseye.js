@@ -4,6 +4,10 @@
 export default function BullsEye( { bull }) {
   // TODO: Legge til nødvendig logikk. Hvis nødvendig.
 
+  // const click = async () => {
+  //   console.log(data)
+  // }
+
   return (
     <ul className="flex flex-row">
       {bull?.map((bulleye) => (      

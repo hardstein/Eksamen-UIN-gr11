@@ -58,14 +58,29 @@ export default function App() {
    */
 
   const validGame = () => true
+  //   if(levels[2])
+  //   createButton('green') && createButton('red')
+  //   // console.log('true')
+  //   console.log('true')
 
   const createGame = (currentLevel) => {
     let level = currentLevel
     if (currentLevel >= 2) {
       level = 2
     }
+
+    //   const buttons = []
+    //   const button = createButton('red')
+    //   buttons.push(button)
+    //   console.log(button)
+    // }
+    // else{validGame===false
+    // console.log('false')}
+
     const { squares } = levels[level]
+    console.log(squares)
     const { colors } = levels[level]
+    console.log(colors)
     const buttons = []
     for (let i = 0; i < squares; i++) {
       const button = createButton(colors[random(colors.length)])
@@ -82,6 +97,14 @@ export default function App() {
       return { buttons, total }
     }
 
+    // if(level >= 2) {
+    //   const buttons = []
+    //   for (let i = 0; i < squares; i++) {
+    //     const button = createButton(colors[random(6)])
+    //     buttons.push(button)
+    //   }
+    // }
+
     if (validGame()) {
       return { buttons, total }
     }
@@ -91,20 +114,26 @@ export default function App() {
   // Koden nedenfor lå opprinnelig her
   const [game, setGame] = useState([])
 
-  // TODO: Legge til nødvendig logikk. Hvis nødvendig.
-
-  useEffect(() => {
-    const getGame = async () => {
-      const data = await createGame(0)
-      console.log(data)
-    // TODO: 0 må byttes ut med noe dynamisk
+  const getGameLevel = async () => {
+    const data = await createGame(0)
+    console.log(data)
     setGame(data)
-    }
-    getGame()
-    
-  }, [])
+  }
 
-  
+  // useEffect(() => {
+  //   const getGame = async () => {
+  //     const data = await createGame(0)
+  //     console.log(data)
+  //   // TODO: 0 må byttes ut med noe dynamisk
+  //   setGame(data)
+  //   }
+  //   getGame()
+
+  // }, [])
+
+  // const makeNewGame = () => {
+  //   createGame(0).buttons
+  // }
 
   // Object.keys(game).forEach((prop) => console.log(prop))
 
@@ -112,13 +141,14 @@ export default function App() {
     <>
       {/* {JSON.stringify(createGame(0).buttons[0].point)} */}
       {/* {JSON.stringify(levels)} */}
-      {JSON.stringify(game?.total)}
-
+      {/* {JSON.stringify(game?.total)} */}
+      {JSON.stringify(getGameLevel)}
+      <h1>{game?.total}</h1>
       <Header
         headTotal={createGame(0).total}
         headPoint={createGame(0).buttons[0].point}
       />
-      <BullsEye bull={createGame(0).buttons} />
+      <BullsEye bull={createGame(2).buttons} />
       <Game games={createGame(0).buttons} />
     </>
   )

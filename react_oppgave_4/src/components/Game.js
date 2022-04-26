@@ -6,8 +6,8 @@ export default function Game({ games }) {
   return (
     <div data-testid="game" className="grid grid-cols-4 gap-6">
       <ul>{games?.map((game) => (
-           <li key={game} value={game.color}>
-        {game.point}</li>
+           <li key={game} >
+        {game.color}</li>
       ))}
       </ul>
       
@@ -18,6 +18,7 @@ export default function Game({ games }) {
         className="col-span-4 w-full rounded-xl border-2 border-emerald-100 p-8 text-lg font-bold text-emerald-500 shadow-lg shadow-emerald-100"
         type="button"
         data-testid="next"
+        onClick={console.log("clicked neste runde")}
       >
         Neste runde
       </button>
