@@ -19,6 +19,36 @@ import client from '../client'
 //     'lessonRefs': lesson[]._ref,
 // }
 
+// *[_type=="lesson" && slug.current == "variabler"] {
+//   ...,
+//   title,
+//   'slug': slug.current,
+//   order,
+//   preamble,
+//   text,
+//   'textText' : text[].text
+// }
+
+const lessonsFields = `
+  // ...,
+  title,
+  'slug': slug.current,
+  order,
+  preamble,
+  'textText' : text[].text,
+  "relatedCourse":  *[_type=='course' && references(^._id)]{ title, 'slug': slug.current },
+`
+
+export const getLesson = async (slug) => {
+  const data = await client.fetch(
+    `*[_type=="lesson" && slug.current == $slug ] {
+          ${lessonsFields}
+      }`,
+    { slug }
+  )
+  return data
+}
+
 const lessonsCourse = `
   //  ...,
   title,
@@ -30,10 +60,10 @@ const lessonsCourse = `
   "relatedCourse":  *[_type=='course' && references(^._id)]{ title, 'slug': slug.current }
 `
 export const getLessonCourse = async () => {
-    const data = await client.fetch(
-      `*[_type=="lesson"] {
+  const data = await client.fetch(
+    `*[_type=="lesson"] {
           ${lessonsCourse}
       }`
-    )
-    return data
-  }
+  )
+  return data
+}

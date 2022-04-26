@@ -7,7 +7,7 @@ import { users } from '../data/data'
 import Lesson from '../components/Lesson'
 // import { getCourse } from '../lib/services/courseQuery'
 import { NEWgetCourse } from '../lib/services/courseQuery'
-import { getLessonCourse } from '../lib/services/lessonQuery'
+// import { getLessonCourse } from '../lib/services/lessonQuery'
 
 export default function Course() {
   // TODO: Add nøvendig logikk
@@ -37,7 +37,7 @@ export default function Course() {
     setUrl()
   }
 
-  // Leksjoner som blir vist på vestre siden på et kurs. 
+  // Leksjoner som blir vist på vestre siden på et kurs.
   const generateLessonsCard = currentCourse?.map((l, i) => (
     <LessonsElement key={i} url={url} handleUrl={handleUrl} l={l} />
   ))
@@ -51,9 +51,9 @@ export default function Course() {
   ))
 
   // /kurs/kurs-slug/leksjons-slug
-  const generateLessonContent = currentCourse?.map((c) => (
-    <Lesson key={c?.id} url={url} c={c} slug={slug} />
-  ))
+  // const generateLessonContent = currentCourse?.map((c, i) => (
+  //   <Lesson key={i} url={url} c={c} courseSlug={slug} />
+  // ))
 
   // Liste over deltakere til et kurs, på høyre side.
   const generateEnrollments = users.map((u) => <li key={u?.name}>{u?.name}</li>)
@@ -69,12 +69,19 @@ export default function Course() {
       </aside>
       <section>
         {/* TODO: START - Vis kun om vi er på /kurs/kurs-slug ikke når vi er på /kurs/kurs-slug/leksjons-slug */}
+        {/* {url === '/kurs/' + slug
+            ? generateCourseContent
+            : null } */}
         {/* TODO: SLUTT */}
         {/* TODO: Vis leksjonens innhold her. HINT: Sjekk React Router Outlet */}
-        {url === '/kurs/' + slug
-          ? generateCourseContent
-          : generateLessonContent}
-        {/* <Outlet /> */}
+
+        {url === '/kurs/' + slug ? (
+          generateCourseContent
+        ) : (
+          <Outlet>
+            {/* {<Lesson url={url} c={currentCourse} courseSlug={slug} />} */}
+          </Outlet>
+        )}
       </section>
       <aside data-testid="enrollments">
         <h3>Deltakere</h3>
