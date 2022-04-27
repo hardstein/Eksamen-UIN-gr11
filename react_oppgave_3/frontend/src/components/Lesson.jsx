@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
-import { getLesson } from '../lib/services/lessonQuery'
+import { getLesson, getLessonComments } from '../lib/services/lessonQuery'
 // import Courses from '../pages/Courses';
 import LessonComments from './LessonComments'
 
@@ -9,16 +9,24 @@ export default function Lesson({ url, c, courseSlug }) {
   // TODO: Add nøvendig logikk
   // let currentSlug = slug
   const { slug } = useParams()
-  const [currentLesson, setCurrentLEsson] = useState([])
+  const [currentLesson, setCurrentLesson] = useState([])
+  const [comments, setComments] = useState([])
 
   useEffect(() => {
     const getLessonData = async () => {
       const lesson = await getLesson(slug)
       console.log('lesson ', lesson)
-      setCurrentLEsson(lesson)
+      setCurrentLesson(lesson)
+    }
+
+    const getCommentsData = async () => {
+      const commentsData = await getLessonComments(slug)
+      console.log('comments ', commentsData)
+      setComments(commentsData)
     }
 
     getLessonData()
+    getCommentsData()
   }, [slug])
 
   const generate = currentLesson.map((cl, i) => (
@@ -59,7 +67,7 @@ export default function Lesson({ url, c, courseSlug }) {
 
       {/* TODO: Liste opp kommentarer */}
       {/* <LessonComments slug={currentSlug} /> */}
-      <LessonComments slug={cl?.slug} />
+      <LessonComments slug={cl?.slug} comments={comments}/>
     </div>
   ))
 

@@ -45,16 +45,6 @@ const lessonsFields = `
   "relatedCourse":  *[_type=='course' && references(^._id)]{ title, 'slug': slug.current },
 `
 
-export const getLesson = async (slug) => {
-  const data = await client.fetch(
-    `*[_type=="lesson" && slug.current == $slug ] {
-          ${lessonsFields}
-      }`,
-    { slug }
-  )
-  return data
-}
-
 const lessonsCourse = `
   //  ...,
   title,
@@ -65,6 +55,34 @@ const lessonsCourse = `
   "lessonText": text[]{text},
   "relatedCourse":  *[_type=='course' && references(^._id)]{ title, 'slug': slug.current }
 `
+
+const commentFields = `
+  ...,
+  createdBy,
+  comment,
+  'lessonSlug':lesson->slug.current
+`
+
+export const getLessonComments = async (slug) => {
+  const data = await client.fetch(
+    `*[_type=="comment" && lesson->slug.current == $slug] {
+          ${commentFields}
+      }`,
+    { slug }
+  )
+  return data
+}
+
+export const getLesson = async (slug) => {
+  const data = await client.fetch(
+    `*[_type=="lesson" && slug.current == $slug ] {
+          ${lessonsFields}
+      }`,
+    { slug }
+  )
+  return data
+}
+
 export const getLessonCourse = async () => {
   const data = await client.fetch(
     `*[_type=="lesson"] {

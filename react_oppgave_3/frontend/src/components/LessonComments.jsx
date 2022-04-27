@@ -1,21 +1,20 @@
-import React from 'react'
-import { comments } from '../data/data'
+import React, { useState } from 'react'
+// import { comments } from '../data/data'
 
-function LessonComments({ slug }) {
-  const currentLessonComments = comments.filter((c) => c?.lesson?.slug === slug)
+function LessonComments({ slug, comments }) {
+  // const currentLessonComments = comments.filter((c) => c?.lesson?.slug === slug)
+  const [error, setError] = useState(false)
+  const [complete, setComplete] = useState(false)
+  const generateComments = comments.map((c, i) => (
+    <li key={i} className="comment">
+      <h5>{c?.createdBy}</h5>
+      <p data-testid="user_comment">{c?.comment}</p>
+    </li>
+  ))
   return (
-    // <div>
-    //   <h1>Kommentarer({currentLessonComments.length})</h1>
-    //   {currentLessonComments.map((c) => (
-    //     <div key={c?.id} className="comment">
-    //       <p>{c?.createdBy.name}</p>
-    //       <p>{c?.comment}</p>
-    //     </div>
-    //   ))}
-    // </div>
-
     <section data-testid="comments">
-      <h4>Kommentarer ({currentLessonComments.length})</h4>
+      {/* <h4>Kommentarer ({currentLessonComments.length})</h4> */}
+      <h4>Kommentarer ({comments.length})</h4>
       <form data-testid="comment_form" noValidate>
         <label htmlFor="name">
           <span>Navn*</span>
@@ -35,20 +34,15 @@ function LessonComments({ slug }) {
           Legg til kommentar
         </button>
         {/* TODO: Vise ved feil */}
-        <p data-testid="form_error">Fyll ut alle felter med *</p>
+        {error ? (<p data-testid="form_error">Fyll ut alle felter med *</p>) : null}
         {/* TODO: Vise ved suksess */}
-        <p data-testid="form_success">Skjema sendt</p>
+        {complete ? (<p data-testid="form_success">Skjema sendt</p>) : null}
       </form>
       {/* TODO: Liste opp kommentarer */}
-
       <ul data-testid="comments_list">
-        {currentLessonComments.map((c) => (
-          <li key={c?.id} className="comment">
-            <h5>{c?.createdBy.name}</h5>
-            <p data-testid="user_comment">{c?.comment}</p>
-          </li>
-        ))}
+        {generateComments}
       </ul>
+
     </section>
   )
 }
