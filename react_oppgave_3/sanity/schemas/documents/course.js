@@ -26,12 +26,6 @@ export default {
       },
       validation: (Rule) => Rule.required(),
     },
-    // {
-    //   name: "lesson",
-    //   title: "Leksjon",
-    //   type: "reference",
-    //   to: [{ type: "lesson" }],
-    // },
     {
       name: "lesson",
       title: "Leksjon",

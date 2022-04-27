@@ -1,19 +1,15 @@
 import { useEffect, useState } from 'react'
 import { Outlet, useParams } from 'react-router-dom'
 import LessonsElement from '../components/LessonsElement'
-// import { courses, users } from '../data/data'
 import { users } from '../data/data'
-// import LessonComments from '../components/LessonComments'
 import Lesson from '../components/Lesson'
-// import { getCourse } from '../lib/services/courseQuery'
 import { NEWgetCourse } from '../lib/services/courseQuery'
-// import { getLessonCourse } from '../lib/services/lessonQuery'
 
 export default function Course() {
   // TODO: Add nøvendig logikk
-  const { slug } = useParams()
+  const { courseSlug } = useParams()
   const [currentCourse, setCurrentCourse] = useState([])
-  const [url, setUrl] = useState('/kurs/' + slug)
+  const [url, setUrl] = useState('/kurs/' + courseSlug)
   // Lagre IDer som skal brukes til parameter for query i groq...
   const [id, setId] = useState([])
 
@@ -25,13 +21,13 @@ export default function Course() {
     //   })
 
     const getCourseData = async () => {
-      const course = await NEWgetCourse(slug)
+      const course = await NEWgetCourse(courseSlug)
       console.log('course: ', course)
       setCurrentCourse(course)
     }
 
     getCourseData()
-  }, [slug])
+  }, [courseSlug])
 
   const handleUrl = () => {
     setUrl()
@@ -49,12 +45,6 @@ export default function Course() {
       <p data-testid="course_description">{c?.description}</p>
     </div>
   ))
-
-  // /kurs/kurs-slug/leksjons-slug
-  // const generateLessonContent = currentCourse?.map((c, i) => (
-  //   <Lesson key={i} url={url} c={c} courseSlug={slug} />
-  // ))
-
   // Liste over deltakere til et kurs, på høyre side.
   const generateEnrollments = users.map((u) => <li key={u?.name}>{u?.name}</li>)
 
@@ -74,14 +64,8 @@ export default function Course() {
             : null } */}
         {/* TODO: SLUTT */}
         {/* TODO: Vis leksjonens innhold her. HINT: Sjekk React Router Outlet */}
+        <Outlet/>
 
-        {url === '/kurs/' + slug ? (
-          generateCourseContent
-        ) : (
-          <Outlet>
-            {/* {<Lesson url={url} c={currentCourse} courseSlug={slug} />} */}
-          </Outlet>
-        )}
       </section>
       <aside data-testid="enrollments">
         <h3>Deltakere</h3>

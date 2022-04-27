@@ -15,8 +15,8 @@ function RouterPage() {
         {/* <Route path="kurs" element={<Courses />}> */}
         <Route path="kurs">
           <Route index element={<Courses />} />
-          <Route path=":slug" element={<Course />}>
-            <Route path=":slug" element={<Lesson />}></Route>
+          <Route path=":courseSlug" element={<Course />}>
+            <Route path=":lessonSlug" element={<Lesson />}></Route>
           </Route>
         </Route>
         <Route path="ny" element={<Create />} />
