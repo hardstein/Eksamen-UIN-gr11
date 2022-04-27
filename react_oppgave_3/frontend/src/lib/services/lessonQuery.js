@@ -42,7 +42,7 @@ const lessonsFields = `
   order,
   preamble,
   'textText' : text[].text,
-  "relatedCourse":  *[_type=='course' && references(^._id)]{ title, 'slug': slug.current },
+  "relatedCourse":  *[_type=='course' && references(^._id)]{ title, 'slug': slug.current, category },
 `
 
 const lessonsCourse = `

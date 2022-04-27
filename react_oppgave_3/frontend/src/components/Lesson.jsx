@@ -4,7 +4,7 @@ import { getLesson, getLessonComments } from '../lib/services/lessonQuery'
 // import Courses from '../pages/Courses';
 import LessonComments from './LessonComments'
 
-export default function Lesson({ url, c, }) {
+export default function Lesson() {
   // TODO: Add nøvendig logikk
   const { lessonSlug, courseSlug } = useParams()
   const [currentLesson, setCurrentLesson] = useState([])
@@ -27,39 +27,38 @@ export default function Lesson({ url, c, }) {
     getCommentsData()
   }, [lessonSlug])
 
-  const generate = currentLesson.map((cl, i) => (
+  const generate = currentLesson.map((currentLesson, i) => (
     <div key={i}>
       <div>
-        <h3 data-testid="course_title">
-          {cl.relatedCourse.map((rc) => (
-            <Link key={rc?.slug} to={""}>Tilbake til {rc?.title}</Link>
-          ))}
-        </h3>
-        <span data-testid="course_category">
-        </span>
+        {currentLesson.relatedCourse.map((relatedCourse) => (
+          <div key={i}>
+            <h3 data-testid="course_title">
+              <Link
+                // key={relatedCourse?.slug}
+                to={'/kurs/' + relatedCourse?.slug}
+              >
+                Tilbake til {relatedCourse?.title}
+              </Link>
+            </h3>
+            <span data-testid="course_category">{relatedCourse?.category}</span>
+          </div>
+        ))}
       </div>
-      <h2 data-testid="lesson_title">
-        {cl?.title}
-      </h2>
-      <p data-testid="lesson_preAmble">
-        {cl?.preamble}
-      </p>
+      <h2 data-testid="lesson_title">{currentLesson?.title}</h2>
+      <p data-testid="lesson_preAmble">{currentLesson?.preamble}</p>
       {/* TODO: Liste opp tekster */}
-      {cl.textText?.map((l, i) => (
+      {currentLesson.textText?.map((l, i) => (
         <p key={i} data-testid="lesson_text">
           {l}
         </p>
       ))}
       {/* TODO: Liste opp kommentarer */}
-      <LessonComments slug={cl?.slug} comments={comments}/>
+      <LessonComments slug={currentLesson?.slug} comments={comments} />
 
       {JSON.stringify(courseSlug)}
       {JSON.stringify(lessonSlug)}
     </div>
   ))
 
-  return <>
-  {console.log("trenger denne ", c)}
-  {generate}
-  </>
+  return <>{generate}</>
 }

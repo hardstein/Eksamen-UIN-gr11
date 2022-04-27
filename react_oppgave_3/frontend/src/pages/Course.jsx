@@ -7,25 +7,16 @@ import { NEWgetCourse } from '../lib/services/courseQuery'
 
 export default function Course() {
   // TODO: Add nøvendig logikk
-  const { courseSlug } = useParams()
+  const { courseSlug, lessonSlug } = useParams()
   const [currentCourse, setCurrentCourse] = useState([])
   const [url, setUrl] = useState('/kurs/' + courseSlug)
-  // Lagre IDer som skal brukes til parameter for query i groq...
-  const [id, setId] = useState([])
 
   useEffect(() => {
-    // Finner objektet som har lik slug som slug param.
-    // const filterCourses = () =>
-    //   courses.filter((c) => {
-    //     return c.slug === slug
-    //   })
-
     const getCourseData = async () => {
       const course = await NEWgetCourse(courseSlug)
       console.log('course: ', course)
       setCurrentCourse(course)
     }
-
     getCourseData()
   }, [courseSlug])
 
@@ -59,11 +50,13 @@ export default function Course() {
       </aside>
       <section>
         {/* TODO: START - Vis kun om vi er på /kurs/kurs-slug ikke når vi er på /kurs/kurs-slug/leksjons-slug */}
-        {/* {url === '/kurs/' + slug
-            ? generateCourseContent
-            : null } */}
+
         {/* TODO: SLUTT */}
         {/* TODO: Vis leksjonens innhold her. HINT: Sjekk React Router Outlet */}
+        {/* Jalla hack?? */}
+        {lessonSlug === undefined
+        ? generateCourseContent
+        : null }
         <Outlet/>
 
       </section>
