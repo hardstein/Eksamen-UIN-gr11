@@ -161,10 +161,12 @@ export default function App() {
   //   console.log(levels?.[game]?.squares)
   // }
 
-  const point = () => {
-    const number = createGame(game).total
-
-    console.log(number)
+  const point = (event) => {
+    const data = event.target.value
+    const number = createGame(game).buttons
+    for (let i = 0; i < number.length; i++) {
+      console.log(number[i].color)
+    }
   }
 
   // Sendes til Games. Kan evn istedet sende inn setGame og lage handleNext i Game
@@ -174,22 +176,27 @@ export default function App() {
 
   return (
     <>
-      {/* {JSON.stringify(createGame(game).buttons[button])} */}
+      {JSON.stringify(createGame(game).buttons)}
       {/* {JSON.stringify(levels[game]?.squares)} */}
       {/* {JSON.stringify(game?.total)} */}
-      {/* {JSON.stringify(getGameLevel)} */}
+      {/* {JSON.stringify(" game " + game)} */}
       {/* {JSON.stringify(createGame[0])} */}
       {/* {JSON.stringify(game)} */}
-      {JSON.stringify(createGame(game).buttons.point)}
-      {JSON.stringify(point())}
+      {/* {JSON.stringify(createGame(game).buttons.point)} */}
+      {/* {JSON.stringify(point)} */}
+      {/* {JSON.stringify()} */}
 
       <Header
         headTotal={createGame(game).total}
         headPoint={createGame(game).buttons[0].point}
       />
-      <BullsEye listOfButtons={createGame(game).buttons} setGame={setGame} />
+      <BullsEye
+        listOfButtons={createGame(game).buttons}
+        setGame={setGame}
+        setButton={setButton}
+      />
       <div>
-        <button type="button" onClick={clickFunc}>
+        <button type="button" onClick={point}>
           Trykk meg
         </button>
       </div>
