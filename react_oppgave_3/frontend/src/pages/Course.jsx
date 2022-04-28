@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react'
 import { Outlet, useParams } from 'react-router-dom'
 import LessonsElement from '../components/LessonsElement'
 import { users } from '../data/data'
-import Lesson from '../components/Lesson'
 import { NEWgetCourse } from '../lib/services/courseQuery'
 
 export default function Course() {
@@ -14,7 +13,6 @@ export default function Course() {
   useEffect(() => {
     const getCourseData = async () => {
       const course = await NEWgetCourse(courseSlug)
-      console.log('course: ', course)
       setCurrentCourse(course)
     }
     getCourseData()

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
+import { deleteData } from '../lib/services/deleteGROQ'
 import { getLesson, getLessonComments } from '../lib/services/lessonQuery'
-// import Courses from '../pages/Courses';
 import LessonComments from './LessonComments'
 
 export default function Lesson() {
@@ -13,18 +13,27 @@ export default function Lesson() {
   useEffect(() => {
     const getLessonData = async () => {
       const lesson = await getLesson(lessonSlug)
-      console.log('lesson ', lesson)
+      // console.log('lesson ', lesson)
       setCurrentLesson(lesson)
     }
 
+    // // Sletter alle kommentarer. ----------
+    // const deleteComments = async () => {
+    //   await deleteData()
+    // }
+    // deleteComments()
+    // // ------------------------------------
+
     const getCommentsData = async () => {
       const commentsData = await getLessonComments(lessonSlug)
-      console.log('comments ', commentsData)
+      // console.log('comments ', commentsData)
       setComments(commentsData)
     }
 
     getLessonData()
     getCommentsData()
+    // comments er med slik at siden blir oppdatert når en ny kommentar legges til.
+  // }, [lessonSlug, comments])
   }, [lessonSlug])
 
   const generate = currentLesson.map((currentLesson, i) => (
@@ -53,7 +62,7 @@ export default function Lesson() {
         </p>
       ))}
       {/* TODO: Liste opp kommentarer */}
-      <LessonComments slug={currentLesson?.slug} comments={comments} />
+      <LessonComments id={currentLesson?._id} comments={comments} />
 
       {JSON.stringify(courseSlug)}
       {JSON.stringify(lessonSlug)}

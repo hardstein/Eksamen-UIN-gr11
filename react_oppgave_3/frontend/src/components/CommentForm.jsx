@@ -1,27 +1,40 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { useParams } from 'react-router-dom'
 
-function CommentForm({ onSubmit, complete }) {
-  const [createdBy, setName] = useState('')
+function CommentForm({ id, onSubmit, complete }) {
+  const [createdBy, setCreatedBy] = useState('')
   const [comment, setComment] = useState('')
-
-  // TODO: koble lesson til kommentar
-  const [lesson, setLesson] = useState('Variabler')
-
-
+  const [lessonRef, setLessonRef] = useState('')
   const [error, setError] = useState(false)
+  const { lessonSlug } = useParams()
+
+  useEffect(() => {
+    // Reset
+    setError(false)
+    setCreatedBy('')
+    setComment('');
+    setLessonRef(id)
+
+    complete ? window.location.reload(false) : null
+  }, [id, complete])
+  // }, [id])
+
   const handleSubmit = (e) => {
     e.preventDefault()
     if (createdBy === '' || comment === '') {
       setError(true)
     } else {
-        // TODO: legge til lesson i kommentar
-      onSubmit({ createdBy, comment })
+      // TODO: legge til lesson i kommentar
+      onSubmit({ createdBy, comment, lessonRef })
+      // Reset
       setError(false)
+      setCreatedBy('')
+      setComment('');
     }
   }
 
   const handleName = (e) => {
-    setName(e.target.value)
+    setCreatedBy(e.target.value)
   }
 
   const handleComment = (e) => {
@@ -30,6 +43,8 @@ function CommentForm({ onSubmit, complete }) {
 
   return (
     <form data-testid="comment_form" noValidate onSubmit={handleSubmit}>
+      <p>{lessonRef}</p>
+      <p>{lessonSlug}</p>
       <label htmlFor="name">
         <span>Navn*</span>
         <input
@@ -37,6 +52,7 @@ function CommentForm({ onSubmit, complete }) {
           type="text"
           name="name"
           id="name"
+          value={createdBy}
           onChange={handleName}
         />
       </label>
@@ -48,6 +64,7 @@ function CommentForm({ onSubmit, complete }) {
           name="comment"
           id="comment"
           cols="30"
+          value={comment}
           onChange={handleComment}
         />
       </label>
@@ -55,9 +72,9 @@ function CommentForm({ onSubmit, complete }) {
         Legg til kommentar
       </button>
       {/* TODO: Vise ved feil */}
-      {error ? <p data-testid="form_error">Fyll ut alle felter med *</p> : null}
+      {error ? <p data-testid="form_error" className="form-error">Fyll ut alle felter med *</p> : null}
       {/* TODO: Vise ved suksess */}
-      {complete ? <p data-testid="form_success">Skjema sendt</p> : null}
+      {complete ? <p data-testid="form_success" className="form-success">Skjema sendt</p> : null}
     </form>
   )
 }

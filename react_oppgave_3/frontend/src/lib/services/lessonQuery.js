@@ -38,6 +38,7 @@ import client from '../client'
 const lessonsFields = `
   // ...,
   title,
+  _id,
   'slug': slug.current,
   order,
   preamble,
