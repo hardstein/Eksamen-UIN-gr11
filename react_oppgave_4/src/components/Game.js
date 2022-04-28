@@ -1,15 +1,12 @@
 // TODO: Nødvendig props
 
-import React from 'react'
+// import React from 'react'
+//  {React.Children.toArray(games?.map((game) => <li>{game.color} {squares}</li>))}
 
-export default function Game({ games, handleNext, squares, levels }) {
+export default function Game({ games, handleNext }) {
   return (
     <div data-testid="game" className="grid grid-cols-4 gap-6">
-      <ul>
-        {/* Listen kan fjernes */}
-        {/* {React.Children.toArray(games?.map((game) => <li>{game.color} {squares}</li>))} */}
-      </ul>
-
+      {`Antall poeng: ${games}`}
       {/* TODO: Må skrive ut antall knapper et spill skal vise */}
       {/* TODO: Må bruke riktig komponent og sende data som props */}
       {/* TODO: Kun vise denne knappen når en runde er ferdig */}

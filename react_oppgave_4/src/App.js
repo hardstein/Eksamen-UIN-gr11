@@ -122,18 +122,14 @@ export default function App() {
   //   setGame(data)
   // }
 
-  // useEffect(() => {
-  //   const getGame = () => {
-  //     const data = createGame(game)
-  //     console.log(data)
-  //   // TODO: 0 må byttes ut med noe dynamisk
-  //   }
-  //   getGame()
-  // }, [])
-
-  // const makeNewGame = () => {
-  //   createGame(0).buttons
-  // }
+  // TODO: 0 må byttes ut med noe dynamisk
+  useEffect(() => {
+    const getGame = () => {
+      const data = createGame?.(game)
+      // console.log(data)
+    }
+    getGame()
+  }, [])
 
   // const getTotal = () => {
   //   console.log(game?.total)
@@ -144,10 +140,10 @@ export default function App() {
   //   console.log(game)
   // }
 
-  const clickFunc = () => {
-    const value = createGame(game).buttons[button].color
-    console.log(value)
-  }
+  // const clickFunc = () => {
+  //   const value = createGame(game).buttons[button].point
+  //   console.log(value)
+  // }
 
   // const square = levels?.[game].squares
 
@@ -156,18 +152,57 @@ export default function App() {
   //   console.log(square)
   // }
 
-  // const clickFunc = async () => {
-  //   const newGame = await createGame(game)
-  //   console.log(levels?.[game]?.squares)
+  // Henter ut total-poeng for en runde, men samsvarer ikke med faktiske buttons
+  const makeNewGame = () => {
+    const data = createGame(game)
+    console.log('Totalt antall poeng mulig: ' + data.total)
+    //  console.log(`Antall squares: ${data.buttons.length}`)
+    return data.total
+  }
+
+  // const returnTotal = () => {
+  //   makeNewGame()
   // }
 
-  const point = (event) => {
-    const data = event.target.value
-    const number = createGame(game).buttons
-    for (let i = 0; i < number.length; i++) {
-      console.log(number[i].color)
+  // Denne gjør det samme som makeNewGame, men STOPPER Å TELLE SQUARES ETTER RUNDE 3
+  // const clickFunc = async () => {
+  //   const newGame = await createGame(game)
+  //   console.log(`Test av antall squares: ${levels?.[game]?.squares}`)
+  // }
+
+  // const point = (event) => {
+  //   const data = event.target.value
+  //   const number = createGame(game).buttons
+  //   for (let i = 0; i < number.length; i++) {
+  //     console.log(number[i].color)
+  //   }
+  // }
+
+  // handleClick for Bullseye
+  // Fjerne async?
+
+  const [totalPoint, setTotalPoint] = useState(0)
+  let sum = 0
+  const handleClick = async (event) => {
+    const points = await event.target.value
+    // event.preventDefault()
+    sum = parseInt(points)
+    setTotalPoint((prev) => prev + sum)
+    console.log('Total: ' + totalPoint)
+    if (totalPoint >= 4) {
+      handleNext()
+      setTotalPoint(0)
+    }
+    if (game >= 2) {
+      if (sum === -1) {
+        setGame(0)
+        setTotalPoint(0)
+      }
     }
   }
+
+  // console.log(`Total: ${total}`)
+  // sum = total
 
   // Sendes til Games. Kan evn istedet sende inn setGame og lage handleNext i Game
   const handleNext = () => {
@@ -176,7 +211,12 @@ export default function App() {
 
   return (
     <>
-      {JSON.stringify(createGame(game).buttons)}
+      {JSON.stringify('RUNDE ' + game)}
+      <p></p>
+      {JSON.stringify('Antall ruter: ' + createGame(game).buttons.length)}
+      <p></p>
+      {JSON.stringify('Mulige totale poeng ' + createGame(game).total)}
+
       {/* {JSON.stringify(levels[game]?.squares)} */}
       {/* {JSON.stringify(game?.total)} */}
       {/* {JSON.stringify(" game " + game)} */}
@@ -184,27 +224,31 @@ export default function App() {
       {/* {JSON.stringify(game)} */}
       {/* {JSON.stringify(createGame(game).buttons.point)} */}
       {/* {JSON.stringify(point)} */}
-      {/* {JSON.stringify()} */}
+      {/* {JSON.stringify(total)} */}
+      {/* {JSON.stringify(levels?.[game]?.squares)} */}
 
       <Header
-        headTotal={createGame(game).total}
-        headPoint={createGame(game).buttons[0].point}
+        // maximumPoints={createGame(game).total}
+        // maximumPoints={returnTotal()}
+        // total={createGame(game).buttons[0].point}
+        totalScore={totalPoint}
       />
       <BullsEye
         listOfButtons={createGame(game).buttons}
-        setGame={setGame}
+        // listOfButtons={makeNewGame()}
+        // setGame={setGame}
         setButton={setButton}
+        handleClick={handleClick}
       />
       <div>
-        <button type="button" onClick={point}>
+        <button type="button" onClick={makeNewGame}>
           Trykk meg
         </button>
       </div>
       <Game
-        games={createGame(game).buttons}
+        games={createGame(game).total}
         handleNext={handleNext}
-        // levels={levels}
-        // squares={}
+        handleClick={handleClick}
       />
     </>
   )
