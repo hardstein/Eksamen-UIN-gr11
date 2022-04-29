@@ -43,8 +43,8 @@ function CommentForm({ id, onSubmit, complete }) {
 
   return (
     <form data-testid="comment_form" noValidate onSubmit={handleSubmit}>
-      <p>{lessonRef}</p>
-      <p>{lessonSlug}</p>
+      {/* <p>{lessonRef}</p>
+      <p>{lessonSlug}</p> */}
       <label htmlFor="name">
         <span>Navn*</span>
         <input

@@ -3,6 +3,7 @@ import { Link, useParams } from 'react-router-dom'
 import { deleteData } from '../lib/services/deleteGROQ'
 import { getLesson, getLessonComments } from '../lib/services/lessonQuery'
 import LessonComments from './LessonComments'
+import Title from './Title'
 
 export default function Lesson() {
   // TODO: Add nøvendig logikk
@@ -53,7 +54,8 @@ export default function Lesson() {
           </div>
         ))}
       </div>
-      <h2 data-testid="lesson_title">{currentLesson?.title}</h2>
+      <Title data-testid="lesson_title" text={currentLesson?.title} />
+      {/* <h2 data-testid="lesson_title">{currentLesson?.title}</h2> */}
       <p data-testid="lesson_preAmble">{currentLesson?.preamble}</p>
       {/* TODO: Liste opp tekster */}
       {currentLesson.textText?.map((l, i) => (
@@ -64,8 +66,9 @@ export default function Lesson() {
       {/* TODO: Liste opp kommentarer */}
       <LessonComments id={currentLesson?._id} comments={comments} />
 
-      {JSON.stringify(courseSlug)}
-      {JSON.stringify(lessonSlug)}
+      {/* SLETT */}
+      {/* {JSON.stringify(courseSlug)}
+      {JSON.stringify(lessonSlug)} */}
     </div>
   ))
 

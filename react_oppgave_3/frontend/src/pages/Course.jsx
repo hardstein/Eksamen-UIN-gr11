@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Outlet, useParams } from 'react-router-dom'
 import LessonsElement from '../components/LessonsElement'
+import Title from '../components/Title'
 import { users } from '../data/data'
 import { NEWgetCourse } from '../lib/services/courseQuery'
 
@@ -30,7 +31,8 @@ export default function Course() {
   // /kurs/kurs-slug
   const generateCourseContent = currentCourse?.map((c) => (
     <div key={c?.title}>
-      <h2 data-testid="course_title">{c?.title}</h2>
+      <Title data-testid="course_title" text={c?.title} />
+      {/* <h2 data-testid="course_title">{c?.title}</h2> */}
       <p data-testid="course_description">{c?.description}</p>
     </div>
   ))

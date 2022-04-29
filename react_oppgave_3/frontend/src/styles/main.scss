@@ -8,6 +8,7 @@
   --red: rgb(226, 101, 91);
   --input: rgb(244, 244, 244);
   --input-border: rgb(211, 211, 211);
+  --light-grey: rgb(243, 243, 243);
   --grey: rgb(183, 183, 183);
   --light-grey: rgb(238, 238, 238);
   --text: rgb(41, 41, 41);
@@ -78,28 +79,29 @@ nav {
     color: inherit;
     text-shadow: var(--box-shadow);
   }
-
   h1,
   a {
     font-size: 1.3rem;
   }
 }
 
-// Aktiv link beholder ikke understrek.
-a {
-  &:active {
-    text-decoration: underline;
-  }
-  &:visited {
-    text-decoration: underline;
-  }
-  &::after {
-    text-decoration: underline;
-  }
-  &:active {
-    text-decoration: underline;
-  }
+// Aktiv link får blir markert med understrek.
+.active-link {
+  text-decoration: underline;
 }
+
+// Setter styling til denne hvis en navlink ikke er aktiv, da mister den understrek.
+.not-active-link {
+  text-decoration: none;
+}
+
+// Komponent som brukes til overskirft i: ny bruker, kurs:kursSlug, kurs:kursSlug:leksjonsSlug, nytt kurs.
+// Mest for å tilfredsstille krav.
+.title {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
 
 section {
   display: grid;
@@ -111,13 +113,18 @@ form > label {
   margin-top: 1rem;
 
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-  input {
+  input, textarea {
     display: block;
     border-radius: var(--br-4);
-    padding: 0.5rem;
-    border: 1px solid var(--text);
+    padding: 1rem;
+    border: 1px solid var(--input-border);
+    // Kalkulerer ved å trekke fra padding og border.
+    width: calc(100% - (2rem + 2px));
     opacity: 0.8;
-    min-width: 80%;
+    background-color: var(--light-grey);
+  }
+  textarea {
+    resize: none;
   }
   #admin {
     min-width: auto;
@@ -144,16 +151,6 @@ button {
   &:hover {
     cursor: pointer;
     opacity: 0.8;
-  }
-}
-
-footer {
-  display: flex;
-  padding-top: 1rem;
-  padding-bottom: 1rem;
-
-  :nth-child(1) {
-    margin-right: auto;
   }
 }
 
@@ -240,6 +237,11 @@ footer {
   }
 }
 
+.lesson-comments {
+  font-size: 1.15rem;
+  margin-top: 2rem;
+}
+
 .comment {
   margin-top: 1rem;
   :nth-child(1) {
@@ -270,6 +272,16 @@ footer {
   color: var(--green);
 }
 
+footer {
+  display: flex;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+
+  :nth-child(1) {
+    margin-right: auto;
+  }
+}
+
 @media screen and (min-width: 600px) {
   section {
     margin: 0 auto;
@@ -294,9 +306,10 @@ footer {
   .grid-3 {
     grid-column-gap: 3rem;
     grid-template-columns: 1fr 3fr 1fr;
-    section h2 {
-    font-size: 2rem
-    }
+    // Fjerne pga. title komponent
+    // section h2 {
+    // font-size: 2rem
+    // }
     p {
       margin-top: 1.5rem;
     }
