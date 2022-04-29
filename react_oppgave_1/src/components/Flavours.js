@@ -25,9 +25,4 @@ export default function Flavours({ flavourList, handleFlavourChange }) {
   )
 }
 
-//   Lage en statisk liste med `option` verdiene - OK
-//  `value` skal ha samme verdi som før - OK
 //  `data-testid` skal ha samme verdi som før - OK, men må denne i hovedlisten?
-//  `Teksten` i option skal ha samme verdi som før - OK
-//   Bruke `.map` til å skrive ut listen med options - OK
-//   Bruke `key` ved bruk av map - OK

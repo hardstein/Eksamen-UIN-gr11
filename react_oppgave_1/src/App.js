@@ -25,7 +25,7 @@ export default function App() {
 
   const handleFlavourChange = (event) => {
     const { value } = event.target
-    setFlavour(value) // Sjekke denne. Den gjør egt ikke noen forskjell til eller fra ...
+    setFlavour(value)
 
     // #### DO NOT CHANGE -- Ikke gjør endringer på koden under
     const cssFlavour = getComputedStyle(
@@ -48,7 +48,6 @@ export default function App() {
         handleFlavourChange={handleFlavourChange}
       />
       <IceCream css={css} />
-      {/* IceCream komponenten fungerer selv om css ikke sende som prop... Fjerne? */}
     </Layout>
   )
 }
