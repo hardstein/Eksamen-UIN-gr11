@@ -57,35 +57,48 @@ export default function App() {
    *
    */
 
+  // const [valid, setValid] = useState(false)
+  // const validGame = () => {
+  //   setValid(!valid)
+  // }
+
   const validGame = () => true
-  //   if(levels[2])
-  //   createButton('green') && createButton('red')
-  //   // console.log('true')
-  //   console.log('true')
 
   const createGame = (currentLevel) => {
     let level = currentLevel
+
     if (currentLevel >= 2) {
       level = 2
     }
-
-    //   const buttons = []
-    //   const button = createButton('red')
-    //   buttons.push(button)
-    //   console.log(button)
-    // }
-    // else{validGame===false
-    // console.log('false')}
 
     const { squares } = levels[level]
 
     const { colors } = levels[level]
 
     const buttons = []
+
+    //   if(level>=1) {
+    //   for (let i = 0; i < squares-2; i++) {
+    //     // const button = createButton(colors[random(colors.length)])
+    //     // buttons.push(button)
+    //     const buttonRed = createButton('red')
+    //     const buttonBlue = createButton(colors)
+    //     buttons.push(buttonRed, buttonBlue)
+    //   }
+    // }
+
     for (let i = 0; i < squares; i++) {
       const button = createButton(colors[random(colors.length)])
       buttons.push(button)
+      // console.log("Buttons " + colors)
+      // if (button.color === 'blue' || button.color === 'red') validGame = true
     }
+
+    // const findColor = buttons?.find(
+    //     (button) => button === 'grey')
+    //     console.log("Fant grå " + button)
+    // }
+
     const total = buttons.reduce((agg, item) => {
       if (item.point > 0) {
         return agg + item.point
@@ -97,20 +110,14 @@ export default function App() {
       return { buttons, total }
     }
 
-    // if(level >= 2) {
-    //   const buttons = []
-    //   for (let i = 0; i < squares; i++) {
-    //     const button = createButton(colors[random(6)])
-    //     buttons.push(button)
-    //   }
-    // }
-
+    // Valid game referer kun til level 2 +
     if (validGame()) {
       return { buttons, total }
     }
     return createGame(level)
   }
 
+  /*  */
   // Koden nedenfor lå opprinnelig her
   const [game, setGame] = useState(0) // Opprinnelig sto det null her
 
@@ -119,15 +126,16 @@ export default function App() {
   //   console.log(list)
   // }
 
-  // TODO: 0 må byttes ut med noe dynamisk
-  useEffect(() => {
-    const getGame = () => {
-      const data = createGame?.(game)
-      console.log(data)
-    }
-    getGame()
-  }, [])
+  const list = createGame(game)
+  console.log(list)
 
+  // // TODO: 0 må byttes ut med noe dynamisk
+  // useEffect(() => {
+  //   // setGame(game)
+  //   // createGame(game)
+  // }, [])
+
+  // console.log(data)
   // const square = levels?.[game].squares
 
   // Henter ut total-poeng for en runde, men samsvarer ikke med faktiske buttons
@@ -152,36 +160,29 @@ export default function App() {
   //   }
   // }
 
-  // handleClick for Bullseye
-  // Fjerne async?
-
   const [totalPoint, setTotalPoint] = useState(0)
 
-  const list = createGame(game)
-  console.log(list)
+  const handleClick = async (event) => {
+    const points = await event.target.value
+    console.log(points)
+    const element = event.target
+    let sum = 0
+    sum = parseInt(points)
+    setTotalPoint((prev) => prev + sum)
+    // console.log('Total: ' + totalPoint)
 
-  // let sum = 0
-  // const handleClick = async (event) => {
-  //   const points = await event.target.value
-  //   // event.preventDefault()
-  //   sum = parseInt(points)
+    // Må endres
+    if (totalPoint >= list.total) {
+      element.disabled = true
+    }
 
-  //   // setTotalPoint((prev) => prev + sum)
-  //   setTotalPoint((prev) => prev + sum)
-  //   // console.log('Total: ' + totalPoint)
-
-  //   if (totalPoint >= list.total) {
-  //   }
-
-  //   if (game >= 2) {
-  //     if (sum === -1) {
-  //       setGame(0)
-  //       setTotalPoint(0)
-  //     }
-  //   }
-  // }
-
-  // console.log("Total point utenfor: " + totalPoint)
+    if (game >= 2) {
+      if (sum === -1) {
+        setGame(0)
+        setTotalPoint(0)
+      }
+    }
+  }
 
   // const buttonList = () => {
   //   const list = createGame(game)
@@ -192,64 +193,46 @@ export default function App() {
   //   // list.forEach(element => console.log("Buttonlist: " + element))
   // }
 
-  // const list = createGame(game)
-  // console.log(list)
-
   // Sendes til Games.js Kan evn istedet sende inn setGame og lage handleNext i Game
-  const handleNext = () => {
-    setGame((prev) => prev + 1)
-    setTotalPoint(0)
-  }
+  // const handleNext = () => {
+  //   setGame((prev) => prev + 1)
+  //   setTotalPoint(0)
+  // }
 
   return (
     <>
-      {JSON.stringify('RUNDE ' + game)}
-      <p></p>
-      {JSON.stringify('Antall ruter: ' + createGame(game).buttons.length)}
-      <p></p>
-      {/* {JSON.stringify('Mulige totale poeng ' + createGame(game).total)} */}
-      {JSON.stringify('Mulige totale poeng ' + list.total)}
+      {JSON.stringify(`RUNDE ${game}`)}
+      <p />
+      {/* {JSON.stringify(`Antall ruter: ${list.buttons.length}`)} */}
+      <p />
+      {/* {JSON.stringify(`Mulige totale poeng ${list.total}`)} */}
+      <p />
+      {JSON.stringify(list.buttons)}
 
       {/* {JSON.stringify(levels[game]?.squares)} */}
-      {/* {JSON.stringify(game?.total)} */}
-      {/* {JSON.stringify(" game " + game)} */}
-      {/* {JSON.stringify(createGame[0])} */}
-      {/* {JSON.stringify(game)} */}
-      {/* {JSON.stringify(createGame(game).buttons.point)} */}
-      {/* {JSON.stringify(point)} */}
-      {/* {JSON.stringify(total)} */}
-      {/* {JSON.stringify(levels?.[game]?.squares)} */}
 
-      <Header
-        // maximumPoints={createGame(game).total}
-        // maximumPoints={buttonList()}
-        maximumPoints={list.total}
-        // total={createGame(game).buttons[0].point}
-        totalScore={totalPoint}
-      />
+      <Header maximumPoints={list.total} totalScore={totalPoint} />
       <BullsEye
-        listOfButtons={list.buttons}
-        // listOfButtons={makeNewGame()}
-        // setGame={setGame}
-        // handleClick={handleClick}
-        setTotalPoint={setTotalPoint}
-        totalPoint={totalPoint}
         list={list}
+        bullsEyeList={list.buttons}
+        totalPoint={totalPoint}
+        setTotalPoint={setTotalPoint}
         game={game}
         setGame={setGame}
+        handleClick={handleClick}
       />
       {/* <div>
         <button type="button" onClick={makeNewGame}>
           Trykk meg
         </button>
       </div> */}
+
       <Game
-        // games={createGame(game).total}
-        games={list.total}
-        game={game}
+        pointsPossible={list.total}
+        setGame={setGame}
         setTotalPoint={setTotalPoint}
         totalPoint={totalPoint}
-        handleNext={handleNext}
+        // handleNext={handleNext}
       />
     </>
   )
