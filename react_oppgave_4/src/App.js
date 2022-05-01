@@ -5,9 +5,6 @@ import BullsEye from './components/Bullseye'
 import Game from './components/Game'
 import Header from './components/Header'
 
-// TODO: createGame har en TODO som må ferdigstilles
-// import { createGame } from './starter_files/start'
-
 export default function App() {
   const levels = [
     {
@@ -57,31 +54,23 @@ export default function App() {
    *
    */
 
-  const [valid, setValid] = useState(true)
-  // const validGame = () => {
-  //   setValid(!valid)
-  // }
+  // const [button, setButton] = useState([])
 
-  const validGame = async (buttons) => {
-    // if (buttons[0].color != 'red') {
-    //   console.log('ikke rød')
-    // const farge = buttons.filter?.((button) =>  button.color === 'blue')
+  const validGame = (buttons) => {
+    buttons.forEach((button, index) => {
+      console.log(button.color)
+    })
 
-    // Henter ut ibjektet fra buttons.lista som fyller kriteret, med attributtet color og point
-    const farge = await buttons.find?.((button) => button.point === 0)
-    if (farge === undefined) {
-      console.log(farge?.color)
-      setGame(5)
+    const redButton = buttons.find?.((button) => button.point === -1)
+    // console.log(redButton?.color) // Returnerer objektets farge
+    if (!redButton) {
+      // Returnerer false hvis rød ikke finnes i lista
+      console.log('false')
+      buttons.pop() // Fjerner siste elementet i lista
+      buttons.push(createButton('red')) // Legger til rød knapp bakerst i lista. Må endres..
+      console.log(buttons)
     }
-
-    // buttons.forEach((button, index) => {
-    //   if (button.point === -1 && button.point > 0)
-    //     console.log(button.color + " "  + index )
-    //     // setValid(!valid)
-    //     // return valid
-    // })
-
-    // return true
+    return true
   }
 
   const createGame = (currentLevel) => {
@@ -97,21 +86,9 @@ export default function App() {
 
     const buttons = []
 
-    //   if(level>=1) {
-    //   for (let i = 0; i < squares-2; i++) {
-    //     // const button = createButton(colors[random(colors.length)])
-    //     // buttons.push(button)
-    //     const buttonRed = createButton('red')
-    //     const buttonBlue = createButton(colors)
-    //     buttons.push(buttonRed, buttonBlue)
-    //   }
-    // }
-
     for (let i = 0; i < squares; i++) {
       const button = createButton(colors[random(colors.length)])
       buttons.push(button)
-      // console.log("Buttons " + colors)
-      // if (button.color === 'blue' || button.color === 'red') validGame = true
     }
 
     const total = buttons.reduce((agg, item) => {
@@ -127,23 +104,18 @@ export default function App() {
 
     // Valid game referer kun til level 2 +
     if (validGame(buttons)) {
-      // console.log(buttons[0].color)
       return { buttons, total }
     }
 
     return createGame(level)
   }
 
-  /*  */
-  // Koden nedenfor lå opprinnelig her
   const [game, setGame] = useState(0) // Opprinnelig sto det NULL her
 
-  const [bullsEye, setbullsEye] = useState([])
+  const [bullsEye, setbullsEye] = useState({})
 
-  // TODO: 0 må byttes ut med noe dynamisk
   useEffect(() => {
     setbullsEye?.(createGame(game))
-    // setGame(game) Ha med denne eller fjerne??
   }, [game])
 
   const [gamePoints, setGamePoints] = useState(0)
@@ -168,21 +140,6 @@ export default function App() {
     }
   }
 
-  // const buttonbullsEye = () => {
-  //   const bullsEye = createGame(game)
-  //   // const button = createGame(game).buttons
-  //   console.log(bullsEye)
-  //   console.log(bullsEye.total)
-  //   console.log(bullsEye.buttons)
-  //   // bullsEye.forEach(element => console.log("ButtonbullsEye: " + element))
-  // }
-
-  // Sendes til Games.js Kan evn istedet sende inn setGame og lage handleNext i Game
-  // const handleNext = () => {
-  //   setGame((prev) => prev + 1)
-  //   G(0)
-  // }
-
   return (
     <>
       {JSON.stringify(`RUNDE ${game}`)}
@@ -197,6 +154,7 @@ export default function App() {
       {/* {JSON.stringify(gamePoints)} */}
 
       {/* {JSON.stringify(levels[game]?.squares)} */}
+      {/* {JSON.stringify(levels[game]?.colors)} */}
 
       <Header
         maximumScore={bullsEye.total}
