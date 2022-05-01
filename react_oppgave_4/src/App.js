@@ -57,12 +57,32 @@ export default function App() {
    *
    */
 
-  // const [valid, setValid] = useState(false)
+  const [valid, setValid] = useState(true)
   // const validGame = () => {
   //   setValid(!valid)
   // }
 
-  const validGame = () => true
+  const validGame = async (buttons) => {
+    // if (buttons[0].color != 'red') {
+    //   console.log('ikke rød')
+    // const farge = buttons.filter?.((button) =>  button.color === 'blue')
+
+    // Henter ut ibjektet fra buttons.lista som fyller kriteret, med attributtet color og point
+    const farge = await buttons.find?.((button) => button.point === 0)
+    if (farge === undefined) {
+      console.log(farge?.color)
+      setGame(5)
+    }
+
+    // buttons.forEach((button, index) => {
+    //   if (button.point === -1 && button.point > 0)
+    //     console.log(button.color + " "  + index )
+    //     // setValid(!valid)
+    //     // return valid
+    // })
+
+    // return true
+  }
 
   const createGame = (currentLevel) => {
     let level = currentLevel
@@ -94,11 +114,6 @@ export default function App() {
       // if (button.color === 'blue' || button.color === 'red') validGame = true
     }
 
-    // const findColor = buttons?.find(
-    //     (button) => button === 'grey')
-    //     console.log("Fant grå " + button)
-    // }
-
     const total = buttons.reduce((agg, item) => {
       if (item.point > 0) {
         return agg + item.point
@@ -111,9 +126,11 @@ export default function App() {
     }
 
     // Valid game referer kun til level 2 +
-    if (validGame()) {
+    if (validGame(buttons)) {
+      // console.log(buttons[0].color)
       return { buttons, total }
     }
+
     return createGame(level)
   }
 
@@ -130,7 +147,7 @@ export default function App() {
   }, [game])
 
   const [gamePoints, setGamePoints] = useState(0)
-  
+
   const handleClick = (event) => {
     const points = event.target.value
     let sum = parseInt(points)
@@ -138,7 +155,6 @@ export default function App() {
     // console.log('Total: ' + gamePoints)
     // console.log('bullsEye-total: ' + bullsEye.total)
 
-   
     // if (gamePoints >= bullsEye.total) {
     //   console.log('bullsEye.total: ' + bullsEye.total)
     //   setGamePoints(bullsEye.total)
@@ -169,7 +185,7 @@ export default function App() {
 
   return (
     <>
-      {/* {JSON.stringify(`RUNDE ${game}`)} */}
+      {JSON.stringify(`RUNDE ${game}`)}
       <p />
       {/* {JSON.stringify(`Antall ruter: ${bullsEye.buttons.length}`)} */}
       <p />
