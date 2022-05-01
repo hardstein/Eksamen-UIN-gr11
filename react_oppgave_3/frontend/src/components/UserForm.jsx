@@ -25,7 +25,7 @@ function UserForm({ onSubmit, loading, complete }) {
     setEmail(e.target.value)
   }
   return (
-    <section data-testid="sign_up">
+    <section data-testid="sign_up" className='user-form'>
       <h2 data-testid="title">Ny bruker</h2>
       <form data-testid="form" noValidate onSubmit={handleSubmit}>
         <label htmlFor="name">

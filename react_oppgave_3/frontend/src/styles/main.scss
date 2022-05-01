@@ -39,6 +39,16 @@ body {
   display: grid;
   height: 100vh;
   grid-template-rows: auto 1fr auto;
+  max-width: 70rem;
+  margin: 0 auto;
+}
+
+.layout {
+  margin: 0 0.5rem;
+}
+
+.grid-3 {
+  display: grid;
 }
 
 code {
@@ -85,7 +95,7 @@ nav {
   }
 }
 
-// Aktiv link får blir markert med understrek.
+// Aktiv link blir markert med understrek.
 .active-link {
   text-decoration: underline;
 }
@@ -102,18 +112,12 @@ nav {
   margin-bottom: 1rem;
 }
 
-
-section {
-  display: grid;
-  margin: 0.5rem;
-}
-
 form > label {
   display: block;
   margin-top: 1rem;
-
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-  input, textarea {
+  input,
+  textarea {
     display: block;
     border-radius: var(--br-4);
     padding: 1rem;
@@ -133,10 +137,10 @@ form > label {
   #admin {
     margin-top: 0.3rem;
   }
-}
-
-.layout > section:nth-child(1) > form:nth-child(2) > label:nth-child(3) {
-  display: flex;
+  #admin {
+    width: 1rem;
+    margin: 0;
+  }
 }
 
 button {
@@ -167,8 +171,6 @@ button {
 
 #filter {
   padding: 0.5rem 4rem 0.5rem 1rem;
-  // height: 2rem;
-  // width: 8rem;
   cursor: pointer;
   border: 1px solid var(--grey);
   background-color: var(--light-grey);
@@ -210,15 +212,6 @@ button {
   }
 }
 
-.grid-3 {
-  display: grid;
-
-  grid-template-columns: auto 1fr;
-  grid-column-gap: 0px;
-  // grid-row-gap: 0px;
-  height: 100%;
-}
-
 .lessons {
   li {
     border: 1px solid var(--grey);
@@ -226,13 +219,10 @@ button {
     padding-top: 0.7rem;
     padding-bottom: 0.7rem;
     padding-left: 0.7rem;
-    // padding: 0.7rem 1.3rem;
     margin-top: 1rem;
-    margin-right: 2rem;
     > a {
       color: inherit;
       text-decoration: none;
-      // background-color: red;
     }
   }
 }
@@ -255,15 +245,15 @@ button {
   }
 }
 
-.grid-3 > aside:nth-child(1) {
-  border-right: 1px solid var(--grey);
-}
-
-.grid-3 > aside:nth-child(3) {
-  border-right: 1px solid var(--grey);
-}
-
 // Sign up
+.user-form {
+  input {
+    opacity: 0.8;
+    border: 1px solid var(--grey);
+    background-color: var(--white);
+  }
+}
+
 .form-error {
   color: var(--red);
 }
@@ -283,8 +273,22 @@ footer {
 }
 
 @media screen and (min-width: 600px) {
-  section {
-    margin: 0 auto;
+  .grid-3 {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    > aside:nth-child(1) {
+      border-right: 1px solid var(--grey);
+    }
+    > aside:nth-child(3) {
+      border-right: 1px solid var(--grey);
+    }
+    > aside:nth-child(1),
+    aside:nth-child(3) {
+      padding-right: 1rem;
+    }
+  }
+  .course-section {
+    padding: 1rem;
   }
 
   .courses-list {
@@ -294,34 +298,44 @@ footer {
 }
 
 @media screen and (min-width: 800px) {
-  body {
-    max-width: 70rem;
-    margin: 0 auto;
+  .user-form {
+    display: grid;
+    justify-content: center;
+    input {
+      width: 25rem;
+    }
   }
 
-  nav {
-    padding-top: 2rem;
-    padding-bottom: 2rem;
-  }
   .grid-3 {
+    display: grid;
     grid-column-gap: 3rem;
     grid-template-columns: 1fr 3fr 1fr;
-    // Fjerne pga. title komponent
-    // section h2 {
-    // font-size: 2rem
-    // }
+    grid-column-gap: 0px;
     p {
       margin-top: 1.5rem;
     }
-    // 2rem is the same as the margin that the aside with lessons has.
+    > aside:nth-child(1) {
+      padding-right: 2rem;
+    }
     > aside:nth-child(3) {
       padding-left: 2rem;
     }
+    // Fjerne styling som blir satt på mindre størrelser
+    > aside:nth-child(1) {
+      border-right: 0;
+    }
+    > aside:nth-child(3) {
+      border-right: 0;
+    }
   }
 
-  .grid-3 > aside:nth-child(3) {
-    border-right: none;
+  .course-section {
+    padding: 2rem;
+  }
+
+  .border-divider {
     border-left: 1px solid var(--grey);
+    border-right: 1px solid var(--grey);
   }
 
   .courses-list {

@@ -10,12 +10,16 @@ export default function Lesson() {
   const { lessonSlug, courseSlug } = useParams()
   const [currentLesson, setCurrentLesson] = useState([])
   const [comments, setComments] = useState([])
-
   useEffect(() => {
+    // For å fikse "cancel all subscriptions and asynchronous tasks in a useEffect cleanup function".
+    let mounted = true
+
     const getLessonData = async () => {
       const lesson = await getLesson(lessonSlug)
+      if (mounted) {
       // console.log('lesson ', lesson)
       setCurrentLesson(lesson)
+      }
     }
 
     // // Sletter alle kommentarer. ----------
@@ -27,15 +31,21 @@ export default function Lesson() {
 
     const getCommentsData = async () => {
       const commentsData = await getLessonComments(lessonSlug)
-      // console.log('comments ', commentsData)
-      setComments(commentsData)
+      if (mounted) {
+        // console.log('comments ', commentsData)
+        setComments(commentsData)
+      }
     }
 
     getLessonData()
     getCommentsData()
+    return () => {
+      // cancel the subscription
+      mounted = false
+    }
     // comments er med slik at siden blir oppdatert når en ny kommentar legges til.
-  // }, [lessonSlug, comments])
-  }, [lessonSlug])
+  }, [lessonSlug, comments])
+  // }, [lessonSlug])
 
   const generate = currentLesson.map((currentLesson, i) => (
     <div key={i}>

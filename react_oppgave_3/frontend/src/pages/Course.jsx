@@ -48,7 +48,7 @@ export default function Course() {
           {generateLessonsCard}
         </ul>
       </aside>
-      <section>
+      <section className='border-divider course-section' >
         {/* TODO: START - Vis kun om vi er på /kurs/kurs-slug ikke når vi er på /kurs/kurs-slug/leksjons-slug */}
 
         {/* TODO: SLUTT */}

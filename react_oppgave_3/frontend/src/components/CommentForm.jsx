@@ -15,9 +15,9 @@ function CommentForm({ id, onSubmit, complete }) {
     setComment('');
     setLessonRef(id)
 
-    complete ? window.location.reload(false) : null
-  }, [id, complete])
-  // }, [id])
+    // complete ? window.location.reload(false) : null
+  // }, [id, complete])
+  }, [id])
 
   const handleSubmit = (e) => {
     e.preventDefault()
