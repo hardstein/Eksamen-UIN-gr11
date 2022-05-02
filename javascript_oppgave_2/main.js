@@ -5,38 +5,40 @@ const correctColor = "rgb(25, 232, 168)";
 const failText = "Feil";
 const correctText = "Ny runde";
 
-const wordList = [
-  "Huske",
-  "Trene",
-  "Danse",
-  "Hoppe",
-  "Sykle",
-  "Gå",
-  "Rulle",
-  "Trille",
-  "Kjøre",
-  "Løpe",
-  "Springe",
-  "Hinke",
-  "Sparke",
-  "Sprinte",
-  "Forflytte",
-  "Trimme",
-  "Løfte",
-  "Snurre",
-  "Svinge",
-  "Svømme",
-  "Flyte",
-  "Fly",
-  "Sveve",
-  "Ake",
-  "Dra",
-];
+// const wordList = [
+//   "Huske",
+//   "Trene",
+//   "Danse",
+//   "Hoppe",
+//   "Sykle",
+//   "Gå",
+//   "Rulle",
+//   "Trille",
+//   "Kjøre",
+//   "Løpe",
+//   "Springe",
+//   "Hinke",
+//   "Sparke",
+//   "Sprinte",
+//   "Forflytte",
+//   "Trimme",
+//   "Løfte",
+//   "Snurre",
+//   "Svinge",
+//   "Svømme",
+//   "Flyte",
+//   "Fly",
+//   "Sveve",
+//   "Ake",
+//   "Dra",
+// ];
 
-// const wordList = ["d", "e", "z", "n", "c", "a", "b"];
+const wordList = ["a", "b", "c", "k", "z"];
 
 // #### START HER ####
-const inpText = document.getElementsByTagName("input");
+// Kilde: https://stackoverflow.com/questions/7459704/in-javascript-what-is-the-best-way-to-convert-a-nodelist-to-an-array
+const inpText = Array.from(document.getElementsByTagName("input"));
+// const inpText = document.getElementsByTagName("input");
 const spans = document.getElementsByTagName("span");
 const btnTest = document.getElementById("test");
 
@@ -56,33 +58,27 @@ const next = () => {
 };
 
 const generateWords = () => {
+  if ((btnTest.value = correctText)) {
+    // Reset input
+    for (let i = 0; i < 4; i++) {
+      inpText[i].value = "";
+    }
 
-  if (btnTest.value = correctText) {
-    // Reset -----
     btnTest.style.backgroundColor = "var(--white)";
     btnTest.innerHTML = "Test";
-    for (let i = 0; i < inpText.length; i++) {
-      console.log((inpText[i].value = ""));
-    }
+
     fourWords = [];
     correctFourWords = [];
     btnTest.removeEventListener("click", generateWords);
     btnTest.addEventListener("click", validate);
-    // ------------
   }
 
   for (let i = 0; i < 4; i++) {
     var randomWord = Math.floor(Math.random() * wordList.length);
 
-    // Hvis et ord allerede finnes så lager den et nytt tall og legger til orden fra den indeksen.
-    if (fourWords.includes(wordList[randomWord])) {
-      randomWord = Math.floor(Math.random() * wordList.length);
-    }
-
     fourWords.push(wordList[randomWord]);
     spans[i].innerHTML = wordList[randomWord];
   }
-  console.log("words :", fourWords);
   checkOrder();
 };
 
@@ -94,7 +90,10 @@ const checkOrder = () => {
 
 const validate = () => {
   let inpTextToArray = [...inpText];
+  // Kilde: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/length
+  const inpValues = new Array(4);
   let result = true;
+
   for (let i = 0; i < inpTextToArray.length; i++) {
     if (inpTextToArray[i].value > 4) {
       console.log("TALLET MÅ VÆRE MINDRE");
@@ -111,13 +110,16 @@ const validate = () => {
       result = false;
     }
 
-    // Hvis ikke alle er rett
-    if (correctFourWords.indexOf(fourWords[i]) != inpTextToArray[i].value - 1) {
-      result = false;
-    }
+    inpValues.splice(inpTextToArray[i].value - 1, 1, fourWords[i]);
+    console.log(inpValues);
   }
-
-  console.log(result);
+  
+  // Hvis ikke alle er rett
+  // Kilde: https://masteringjs.io/tutorials/fundamentals/compare-arrays
+  if (JSON.stringify(correctFourWords) != JSON.stringify(inpValues)) {
+    console.log("FEIL REKKEFØLGE");
+    result = false;
+  }
 
   result ? next() : wrong();
 };

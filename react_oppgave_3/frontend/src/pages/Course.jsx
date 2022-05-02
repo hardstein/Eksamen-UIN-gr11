@@ -28,6 +28,7 @@ export default function Course() {
 
   const handleClick = (e) => {
     console.log(e.target.innerHTML)
+    const test = e.target.innerHTML
     setActive(true);
   }
 
