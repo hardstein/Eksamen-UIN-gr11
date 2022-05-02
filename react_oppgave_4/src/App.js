@@ -46,31 +46,15 @@ export default function App() {
     }
   }
 
-  // TODO: Ferdigstill funksjonen under for å sjekke om kravene for Nivå 3 er oppfylt
-  /**
-   *
-   * At det er minst en knapp som gir poeng
-   * At det er minst en rød knapp
-   *
-   */
-
-  // const [button, setButton] = useState([])
-
   const validGame = (buttons) => {
-    buttons.forEach((button, index) => {
-      console.log(button.color)
-    })
+    const redButton = buttons.find((button) => button.point === -1)
+    const coloredButton = buttons.find((button) => button.point > 0)
 
-    const redButton = buttons.find?.((button) => button.point === -1)
-    // console.log(redButton?.color) // Returnerer objektets farge
-    if (!redButton) {
-      // Returnerer false hvis rød ikke finnes i lista
-      console.log('false')
-      buttons.pop() // Fjerner siste elementet i lista
-      // setTimeout(() => {buttons.push(createButton('red'))}, 5000)
-      buttons.push(createButton('red')) // Legger til rød knapp bakerst i lista. Må endres..
-      console.log(buttons)
+    if (!redButton || !coloredButton) {
+      console.log(buttons, game) // Fjerne, dobbeltsjekke
+      return setGame(game)
     }
+
     return true
   }
 
@@ -125,8 +109,6 @@ export default function App() {
     let sum = parseInt(points)
     const newPoints = gamePoints + sum
     setGamePoints(newPoints)
-    // console.log('newPoints: ' + newPoints)
-    // console.log('gamepoints: ' + gamePoints)
 
     if (newPoints >= bullsEye.total) {
       setGamePoints(bullsEye.total)
@@ -142,7 +124,7 @@ export default function App() {
 
   return (
     <>
-      {JSON.stringify(`RUNDE ${game + 1}`)}
+      {JSON.stringify(`RUNDE ${game}`)}
       <p />
       {/* {JSON.stringify(`Antall ruter: ${bullsEye.buttons.length}`)} */}
       <p />
