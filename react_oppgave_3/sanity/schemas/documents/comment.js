@@ -25,4 +25,14 @@ export default {
         to: { type: "lesson" },
       },
     ],
+    // orderings: [
+    //   {
+    //     title: 'Release Date, New',
+    //     name: 'releaseDateDesc',
+    //     by: [
+    //       {field: 'releaseDate', direction: 'desc'}
+    //     ]
+    //   },
+    // ]
+  
   };

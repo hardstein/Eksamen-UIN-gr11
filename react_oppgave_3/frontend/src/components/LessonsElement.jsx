@@ -17,7 +17,7 @@ function LessonsElement({ url, l, handleClick, active }) {
         data-slug="Dynamisk verdi"
         // Fikk ideen til å bruke slugs[i] her fra koden over som er kommentert ut.
         to={url + '/' + slugs[i]}
-        onClick={() => handleClick()}
+        onClick={() => handleClick(event)}
       >
         {active ? "AKTIV-" + le : le}
       </Link>

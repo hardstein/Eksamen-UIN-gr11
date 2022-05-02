@@ -59,6 +59,7 @@ const lessonsCourse = `
 
 const commentFields = `
   ...,
+  _createdAt,
   createdBy,
   comment,
   'lessonSlug':lesson->slug.current
@@ -66,7 +67,8 @@ const commentFields = `
 
 export const getLessonComments = async (slug) => {
   const data = await client.fetch(
-    `*[_type=="comment" && lesson->slug.current == $slug] {
+    `*[_type=="comment" && lesson->slug.current == $slug] | order(_createdAt desc)
+    {
           ${commentFields}
       }`,
     { slug }

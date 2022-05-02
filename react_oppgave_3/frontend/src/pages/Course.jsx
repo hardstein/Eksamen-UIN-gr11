@@ -26,7 +26,8 @@ export default function Course() {
   // Lesson links
   const [active, setActive] = useState(false)
 
-  const handleClick = () => {
+  const handleClick = (e) => {
+    console.log(e.target.innerHTML)
     setActive(true);
   }
 
