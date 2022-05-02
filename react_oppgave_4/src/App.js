@@ -67,6 +67,7 @@ export default function App() {
       // Returnerer false hvis rød ikke finnes i lista
       console.log('false')
       buttons.pop() // Fjerner siste elementet i lista
+      // setTimeout(() => {buttons.push(createButton('red'))}, 5000)
       buttons.push(createButton('red')) // Legger til rød knapp bakerst i lista. Må endres..
       console.log(buttons)
     }
@@ -102,7 +103,6 @@ export default function App() {
       return { buttons, total }
     }
 
-    // Valid game referer kun til level 2 +
     if (validGame(buttons)) {
       return { buttons, total }
     }
@@ -125,12 +125,10 @@ export default function App() {
     let sum = parseInt(points)
     const newPoints = gamePoints + sum
     setGamePoints(newPoints)
-    console.log('newPoints: ' + newPoints)
-    console.log('gamepoints: ' + gamePoints)
+    // console.log('newPoints: ' + newPoints)
+    // console.log('gamepoints: ' + gamePoints)
 
-    // Sjekk på nytt, om kan kutte ut logikk i Header...
     if (newPoints >= bullsEye.total) {
-      console.log('bullsEye.total: ' + bullsEye.total)
       setGamePoints(bullsEye.total)
     }
 
@@ -144,7 +142,7 @@ export default function App() {
 
   return (
     <>
-      {JSON.stringify(`RUNDE ${game}`)}
+      {JSON.stringify(`RUNDE ${game + 1}`)}
       <p />
       {/* {JSON.stringify(`Antall ruter: ${bullsEye.buttons.length}`)} */}
       <p />
