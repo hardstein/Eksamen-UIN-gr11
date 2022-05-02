@@ -123,14 +123,16 @@ export default function App() {
   const handleClick = (event) => {
     const points = event.target.value
     let sum = parseInt(points)
-    setGamePoints((prev) => prev + sum)
-    // console.log('Total: ' + gamePoints)
-    // console.log('bullsEye-total: ' + bullsEye.total)
+    const newPoints = gamePoints + sum
+    setGamePoints(newPoints)
+    console.log('newPoints: ' + newPoints)
+    console.log('gamepoints: ' + gamePoints)
 
-    // if (gamePoints >= bullsEye.total) {
-    //   console.log('bullsEye.total: ' + bullsEye.total)
-    //   setGamePoints(bullsEye.total)
-    // }
+    // Sjekk på nytt, om kan kutte ut logikk i Header...
+    if (newPoints >= bullsEye.total) {
+      console.log('bullsEye.total: ' + bullsEye.total)
+      setGamePoints(bullsEye.total)
+    }
 
     if (game >= 2) {
       if (sum === -1) {
