@@ -23,9 +23,16 @@ export default function Course() {
     setUrl()
   }
 
+  // Lesson links
+  const [active, setActive] = useState(false)
+
+  const handleClick = () => {
+    setActive(true);
+  }
+
   // Leksjoner som blir vist på vestre siden på et kurs.
   const generateLessonsCard = currentCourse?.map((l, i) => (
-    <LessonsElement key={i} url={url} handleUrl={handleUrl} l={l} />
+    <LessonsElement key={i} url={url} handleUrl={handleUrl} l={l} handleClick={handleClick} active={active}/>
   ))
 
   // /kurs/kurs-slug

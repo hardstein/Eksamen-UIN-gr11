@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 
-function LessonsElement({ url, l }) {
+// function LessonsElement({ url, l }) {
+function LessonsElement({ url, l, handleClick, active }) {
   const names = l.lessonName
   const slugs = l.lessonSlug
   // Inspirasjon fra nettet:
@@ -16,8 +17,9 @@ function LessonsElement({ url, l }) {
         data-slug="Dynamisk verdi"
         // Fikk ideen til å bruke slugs[i] her fra koden over som er kommentert ut.
         to={url + '/' + slugs[i]}
+        onClick={() => handleClick()}
       >
-        {le}
+        {active ? "AKTIV-" + le : le}
       </Link>
     </li>
   ))

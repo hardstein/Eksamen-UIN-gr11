@@ -32,7 +32,6 @@ export default function Lesson() {
     const getCommentsData = async () => {
       const commentsData = await getLessonComments(lessonSlug)
       if (mounted) {
-        // console.log('comments ', commentsData)
         setComments(commentsData)
       }
     }
@@ -40,7 +39,7 @@ export default function Lesson() {
     getLessonData()
     getCommentsData()
     return () => {
-      // cancel the subscription
+      // cleanup function
       mounted = false
     }
     // comments er med slik at siden blir oppdatert når en ny kommentar legges til.
