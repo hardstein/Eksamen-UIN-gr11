@@ -212,6 +212,8 @@ button {
   }
 }
 
+
+
 .lessons {
   li {
     border: 1px solid var(--grey);
@@ -224,6 +226,21 @@ button {
       color: inherit;
       text-decoration: none;
     }
+  }
+}
+
+.active-lesson {
+  background: var(--green);
+}
+
+.lesson-heading {
+  display: flex;
+  a{
+    color: inherit;
+  }
+  span {
+    font-weight: 800;
+    margin-left: auto;
   }
 }
 

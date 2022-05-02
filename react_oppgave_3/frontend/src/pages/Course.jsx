@@ -23,18 +23,21 @@ export default function Course() {
     setUrl()
   }
 
-  // Lesson links
-  const [active, setActive] = useState(false)
+  // // Lesson links
+  // const [active, setActive] = useState(false)
+  // const [testState, setTestState] = useState('')
 
-  const handleClick = (e) => {
-    console.log(e.target.innerHTML)
-    const test = e.target.innerHTML
-    setActive(true);
-  }
+  // const handleClick = (e) => {
+  //   console.log(e.target.innerHTML)
+  //   const test = e.target.innerHTML
+  //   setTestState(e.target.innerHTML + " - aktive")
+  //   setActive(true);
+  // }
 
   // Leksjoner som blir vist på vestre siden på et kurs.
   const generateLessonsCard = currentCourse?.map((l, i) => (
-    <LessonsElement key={i} url={url} handleUrl={handleUrl} l={l} handleClick={handleClick} active={active}/>
+    // <LessonsElement key={i} url={url} handleUrl={handleUrl} l={l} handleClick={handleClick} active={active} testState={testState}/>
+    <LessonsElement key={i} url={url} handleUrl={handleUrl} l={l} />
   ))
 
   // /kurs/kurs-slug

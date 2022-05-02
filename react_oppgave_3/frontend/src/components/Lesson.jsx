@@ -50,7 +50,7 @@ export default function Lesson() {
     <div key={i}>
       <div>
         {currentLesson.relatedCourse.map((relatedCourse) => (
-          <div key={i}>
+          <div key={i} className="lesson-heading">
             <h3 data-testid="course_title">
               <Link
                 // key={relatedCourse?.slug}
@@ -59,7 +59,8 @@ export default function Lesson() {
                 Tilbake til {relatedCourse?.title}
               </Link>
             </h3>
-            <span data-testid="course_category">{relatedCourse?.category}</span>
+            <span data-testid="course_category">Kategori: {relatedCourse?.category}</span>
+            {/* <h4 class=word>I'm an H4 Headline With Seven Words</h4> */}
           </div>
         ))}
       </div>

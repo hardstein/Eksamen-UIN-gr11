@@ -1,25 +1,27 @@
-import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useParams} from 'react-router-dom'
 
-// function LessonsElement({ url, l }) {
-function LessonsElement({ url, l, handleClick, active }) {
+// function LessonsElement({ url, l, handleClick, active, testState }) {
+function LessonsElement({ url, l }) {
   const names = l.lessonName
   const slugs = l.lessonSlug
+  const { lessonSlug } = useParams()
+
   // Inspirasjon fra nettet:
   // https://stackoverflow.com/questions/32937181/javascript-es6-map-multiple-arrays
   // let zipped = names.map((x, i) => [x, slugs[i]]);
 
   // NB: l og le
   const generate = names?.map((le, i) => (
-    <li key={i}>
+    <li key={i}
+    className={slugs[i] === lessonSlug ? "active-lesson" : null}
+    >
       <Link
         data-testid="lesson_url"
         data-slug="Dynamisk verdi"
         // Fikk ideen til å bruke slugs[i] her fra koden over som er kommentert ut.
         to={url + '/' + slugs[i]}
-        onClick={() => handleClick(event)}
       >
-        {active ? "AKTIV-" + le : le}
+        {slugs[i] === lessonSlug ? le + " - aktiv " : le}
       </Link>
     </li>
   ))
