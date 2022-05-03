@@ -1,4 +1,3 @@
-/* eslint-disable no-plusplus */
 import { useEffect, useState } from 'react'
 
 import BullsEye from './components/Bullseye'
@@ -94,7 +93,7 @@ export default function App() {
     return createGame(level)
   }
 
-  const [game, setGame] = useState(0) // Opprinnelig sto det NULL her
+  const [game, setGame] = useState(0) // Opprinnelig sto det NULL inni denne
 
   const [bullsEye, setbullsEye] = useState({})
 
@@ -124,32 +123,13 @@ export default function App() {
 
   return (
     <>
-      {JSON.stringify(`RUNDE ${game}`)}
-      <p />
-      {/* {JSON.stringify(`Antall ruter: ${bullsEye.buttons.length}`)} */}
-      <p />
-      {/* {JSON.stringify(`Mulige totale poeng ${bullsEye.total}`)} */}
-      <p />
-      {/* {JSON.stringify(bullsEye.buttons)} */}
-      <p />
-      {/* {JSON.stringify(bullsEye.total)} */}
-      {/* {JSON.stringify(gamePoints)} */}
+      {/* {JSON.stringify(`RUNDE ${game}`)} */}
 
-      {/* {JSON.stringify(levels[game]?.squares)} */}
-      {/* {JSON.stringify(levels[game]?.colors)} */}
-
-      <Header
-        maximumScore={bullsEye.total}
-        gamePoints={gamePoints}
-        setGamePoints={setGamePoints}
-      />
+      <Header maximumScore={bullsEye.total} gamePoints={gamePoints} />
       <BullsEye
         bullsEye={bullsEye.buttons}
         maximumScore={bullsEye.total}
         gamePoints={gamePoints}
-        setGamePoints={setGamePoints}
-        game={game}
-        setGame={setGame}
         handleClick={handleClick}
       />
       <Game
