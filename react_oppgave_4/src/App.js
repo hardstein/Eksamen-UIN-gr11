@@ -50,10 +50,8 @@ export default function App() {
     const coloredButton = buttons.find((button) => button.point > 0)
 
     if (!redButton || !coloredButton) {
-      console.log(buttons, game) // Fjerne, dobbeltsjekke
       return setGame(game)
     }
-
     return true
   }
 
@@ -93,9 +91,9 @@ export default function App() {
     return createGame(level)
   }
 
-  const [game, setGame] = useState(0) // Opprinnelig sto det NULL inni denne
+  const [game, setGame] = useState(0)
 
-  const [bullsEye, setbullsEye] = useState({})
+  const [bullsEye, setbullsEye] = useState({}) // Sjekk denne
 
   useEffect(() => {
     setbullsEye?.(createGame(game))
@@ -123,8 +121,6 @@ export default function App() {
 
   return (
     <>
-      {/* {JSON.stringify(`RUNDE ${game}`)} */}
-
       <Header maximumScore={bullsEye.total} gamePoints={gamePoints} />
       <BullsEye
         bullsEye={bullsEye.buttons}

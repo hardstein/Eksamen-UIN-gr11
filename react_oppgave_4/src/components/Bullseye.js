@@ -4,22 +4,10 @@ export default function BullsEye({
   maximumScore,
   handleClick,
 }) {
-  // Styling:
-  // grid grid-cols-4 justify-self-center place-content-center
-  // flex place-content-center flex-wrap-4
-  // justify-content flex-col
-  // flex basis-full justify-around
-  // flex flex-row justify-center flex-wrap"
-  // grid grid-cols-4 justify-items-center gap-0
-
-  // grid grid-cols-4 gap-0 justify-items-center mx-10 px-10
-
-  // På className, button elementet: flex items-center justify-center h-36 w-36
-
   return (
     <>
       {gamePoints < maximumScore ? (
-        <div className="grid grid-cols-4 gap-6 p-10 m-8 ">
+        <div className="m-8 grid grid-cols-4 gap-6 p-10 ">
           {bullsEye?.map((element, index) => (
             <button
               key={index}
