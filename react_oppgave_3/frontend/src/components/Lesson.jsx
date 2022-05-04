@@ -59,7 +59,9 @@ export default function Lesson() {
                 Tilbake til {relatedCourse?.title}
               </Link>
             </h3>
-            <span data-testid="course_category">Kategori: {relatedCourse?.category}</span>
+            <span data-testid="course_category">
+          Kategori: <span>{relatedCourse?.category}</span>
+        </span>
             {/* <h4 class=word>I'm an H4 Headline With Seven Words</h4> */}
           </div>
         ))}
