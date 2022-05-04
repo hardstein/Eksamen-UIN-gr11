@@ -30,7 +30,7 @@ export default function Course() {
   // /kurs/kurs-slug
   const generateCourseContent = currentCourse?.map((c) => (
     <div key={c?.title}>
-      <Title data-testid="course_title" text={c?.title} />
+      <Title testid="course_title" text={c?.title} />
       {/* <h2 data-testid="course_title">{c?.title}</h2> */}
       <p data-testid="course_description">{c?.description}</p>
     </div>

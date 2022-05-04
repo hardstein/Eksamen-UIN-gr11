@@ -66,7 +66,7 @@ export default function Lesson() {
           </div>
         ))}
       </div>
-      <Title data-testid="lesson_title" text={currentLesson?.title} />
+      <Title testid="lesson_title" text={currentLesson?.title} />
       {/* <h2 data-testid="lesson_title">{currentLesson?.title}</h2> */}
       <p data-testid="lesson_preAmble">{currentLesson?.preamble}</p>
       {/* TODO: Liste opp tekster */}

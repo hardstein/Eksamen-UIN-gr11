@@ -23,7 +23,7 @@ function LessonComments({ id, comments }) {
       <h4 className='lesson-comments'>Kommentarer ({comments.length})</h4>
       <CommentForm id={id} onSubmit={onSubmit} complete={complete} />
       {/* TODO: Liste opp kommentarer */}
-      <ul data-testid="comments_list">{generateComments}</ul>
+      <ul data-testid="comments_list" className='comments-list'>{generateComments}</ul>
       {/* {JSON.stringify(id)} */}
     </section>
   )

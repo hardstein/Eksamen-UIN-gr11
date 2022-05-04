@@ -70,7 +70,8 @@ function CommentForm({ id, onSubmit, complete }) {
       {/* Vise ved feil */}
       {error ? <p data-testid="form_error" className="form-error">Fyll ut alle felter med *</p> : null}
       {/* Vise ved suksess */}
-      {complete ? <p data-testid="form_success" className="form-success">Skjema sendt</p> : null}
+      {/* Kunne fjerne "Skjema sendt" fordi det var tilstrekkelig med å kun se at en ny kommentar lagres. */}
+      {/* {complete ? <p data-testid="form_success" className="form-success">Skjema sendt</p> : null} */}
     </form>
   )
 }

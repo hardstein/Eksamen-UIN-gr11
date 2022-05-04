@@ -1,8 +1,10 @@
 import React from 'react'
 
-function Title( {text}) {
+function Title( {text, testid}) {
   return (
-    <h2 className='title'>{text}</h2>
+    // Litt usikker på hvor denne komponenten skal brukes.
+    // Men forstår at det er gunstig å ha hvis det er en tekst som er lik på flere steder/sider.
+    <h2 data-testid={testid}  className='title'>{text}</h2>
   )
 }
 

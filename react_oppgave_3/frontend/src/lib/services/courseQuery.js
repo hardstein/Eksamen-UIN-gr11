@@ -21,7 +21,7 @@ const courseFields = `
 
 export const getCourses = async () => {
   const data = await client.fetch(
-    `*[_type == "course" ] {
+    `*[_type == "course" ] | order(_createdAt asc) {
           ${coursesFields}
       }`
   )

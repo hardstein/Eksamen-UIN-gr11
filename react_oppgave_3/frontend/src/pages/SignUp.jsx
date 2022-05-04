@@ -4,8 +4,6 @@ import UserForm from '../components/UserForm'
 import { createUser } from '../lib/services/userService'
 
 export default function SignUp() {
-  // TODO: Legg til logikk for å håntere form, navigasjon, input, validering m.m
-  // TODO: Styling m.m
   const [loading, setLoading] = useState(false)
   const [complete, setComplete] = useState(false)
 
