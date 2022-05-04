@@ -62,13 +62,13 @@ function UserForm({ onSubmit, loading, complete }) {
         <button data-testid="form_submit" type="submit">
           {loading ? 'Sender' : 'Lag ny bruker'}
         </button>
-        {/* TODO: Bruk ved error */}
+        {/* Bruk ved error */}
         {error ? (
           <p data-testid="form_error" className="form-error">
             Fyll ut alle felter med *
           </p>
         ) : null}
-        {/* TODO: Bruk ved suksess */}
+        {/* Bruk ved suksess */}
         {complete ? (
           <p data-testid="form_success" className="form-success">
             Skjema sendt
