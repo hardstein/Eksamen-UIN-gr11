@@ -7,18 +7,18 @@ import Title from './Title'
 
 export default function Lesson() {
   // TODO: Add nøvendig logikk
-  const { lessonSlug, courseSlug } = useParams()
+  const { lessonSlug } = useParams()
   const [currentLesson, setCurrentLesson] = useState([])
   const [comments, setComments] = useState([])
   useEffect(() => {
     // For å fikse "cancel all subscriptions and asynchronous tasks in a useEffect cleanup function".
-    let mounted = true
+    let subscription = true
 
     const getLessonData = async () => {
       const lesson = await getLesson(lessonSlug)
-      if (mounted) {
-      // console.log('lesson ', lesson)
-      setCurrentLesson(lesson)
+      if (subscription) {
+        // console.log('lesson ', lesson)
+        setCurrentLesson(lesson)
       }
     }
 
@@ -31,7 +31,7 @@ export default function Lesson() {
 
     const getCommentsData = async () => {
       const commentsData = await getLessonComments(lessonSlug)
-      if (mounted) {
+      if (subscription) {
         setComments(commentsData)
       }
     }
@@ -40,7 +40,7 @@ export default function Lesson() {
     getCommentsData()
     return () => {
       // cleanup function
-      mounted = false
+      subscription = false
     }
     // comments er med slik at siden blir oppdatert når en ny kommentar legges til.
   }, [lessonSlug, comments])
@@ -60,8 +60,8 @@ export default function Lesson() {
               </Link>
             </h3>
             <span data-testid="course_category">
-          Kategori: <span>{relatedCourse?.category}</span>
-        </span>
+              Kategori: <span>{relatedCourse?.category}</span>
+            </span>
             {/* <h4 class=word>I'm an H4 Headline With Seven Words</h4> */}
           </div>
         ))}
@@ -77,10 +77,7 @@ export default function Lesson() {
       ))}
       {/* TODO: Liste opp kommentarer */}
       <LessonComments id={currentLesson?._id} comments={comments} />
-
-      {/* SLETT */}
-      {/* {JSON.stringify(courseSlug)}
-      {JSON.stringify(lessonSlug)} */}
+      
     </div>
   ))
 

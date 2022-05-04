@@ -3,7 +3,7 @@ import { Outlet, useParams } from 'react-router-dom'
 import LessonsElement from '../components/LessonsElement'
 import Title from '../components/Title'
 import { users } from '../data/data'
-import { NEWgetCourse } from '../lib/services/courseQuery'
+import { getCourse } from '../lib/services/courseQuery'
 
 export default function Course() {
   // TODO: Add nøvendig logikk
@@ -13,7 +13,7 @@ export default function Course() {
 
   useEffect(() => {
     const getCourseData = async () => {
-      const course = await NEWgetCourse(courseSlug)
+      const course = await getCourse(courseSlug)
       setCurrentCourse(course)
     }
     getCourseData()
@@ -22,17 +22,6 @@ export default function Course() {
   const handleUrl = () => {
     setUrl()
   }
-
-  // // Lesson links
-  // const [active, setActive] = useState(false)
-  // const [testState, setTestState] = useState('')
-
-  // const handleClick = (e) => {
-  //   console.log(e.target.innerHTML)
-  //   const test = e.target.innerHTML
-  //   setTestState(e.target.innerHTML + " - aktive")
-  //   setActive(true);
-  // }
 
   // Leksjoner som blir vist på vestre siden på et kurs.
   const generateLessonsCard = currentCourse?.map((l, i) => (

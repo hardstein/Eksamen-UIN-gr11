@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
 import CourseCard from '../components/CourseCard'
 import Filter from '../components/Filter'
-// import { courses } from '../data/data'
 import { getCourses } from '../lib/services/courseQuery'
 
 export default function Courses() {
