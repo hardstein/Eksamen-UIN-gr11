@@ -1,10 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { createComment } from '../lib/services/commentService'
 import CommentForm from './CommentForm'
-// import { comments } from '../data/data'
 
 function LessonComments({ id, comments }) {
-  // const [error, setError] = useState(false)
   const [complete, setComplete] = useState(false)
 
   const onSubmit = async (data) => {

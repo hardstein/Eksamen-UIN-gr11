@@ -1,12 +1,10 @@
 import { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
 
 function CommentForm({ id, onSubmit, complete }) {
   const [createdBy, setCreatedBy] = useState('')
   const [comment, setComment] = useState('')
   const [lessonRef, setLessonRef] = useState('')
   const [error, setError] = useState(false)
-  const { lessonSlug } = useParams()
 
   useEffect(() => {
     // Reset
@@ -43,8 +41,6 @@ function CommentForm({ id, onSubmit, complete }) {
 
   return (
     <form data-testid="comment_form" noValidate onSubmit={handleSubmit}>
-      {/* <p>{lessonRef}</p>
-      <p>{lessonSlug}</p> */}
       <label htmlFor="name">
         <span>Navn*</span>
         <input
@@ -71,9 +67,9 @@ function CommentForm({ id, onSubmit, complete }) {
       <button data-testid="form_submit" type="submit">
         Legg til kommentar
       </button>
-      {/* TODO: Vise ved feil */}
+      {/* Vise ved feil */}
       {error ? <p data-testid="form_error" className="form-error">Fyll ut alle felter med *</p> : null}
-      {/* TODO: Vise ved suksess */}
+      {/* Vise ved suksess */}
       {complete ? <p data-testid="form_success" className="form-success">Skjema sendt</p> : null}
     </form>
   )

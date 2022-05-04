@@ -1,9 +1,7 @@
 import { NavLink } from 'react-router-dom'
 
-
-// NB: Lånt kode for å sette en navlink til aktiv, slik at den blir stylet med linje under ordet. -
-// https://www.kindacode.com/article/react-router-how-to-highlight-active-link/                   -
-// ------------------------------------------------------------------------------------------------
+// NB: Lånt kode for å sette en navlink til aktiv, slik at den blir stylet med linje under ordet.
+// https://www.kindacode.com/article/react-router-how-to-highlight-active-link/
 
 function Navbar() {
   return (

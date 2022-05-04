@@ -10,7 +10,6 @@ function Filter({ handleOptions }) {
 
   return (
     <label htmlFor="filter">
-      {/* {empty ? <span>Velg kategori:</span> : null} */}
       <select
         id="filter"
         name="filter"
@@ -19,7 +18,6 @@ function Filter({ handleOptions }) {
       >
         {generateFilterOptions}
         {/* {console.log(category)} */}
-        {/* TODO: Legg til flere kategorier - sjekk mappen data */}
       </select>
     </label>
   )

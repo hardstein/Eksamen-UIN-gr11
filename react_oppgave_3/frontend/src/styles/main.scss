@@ -239,8 +239,10 @@ button {
     color: inherit;
   }
   span {
-    font-weight: 800;
     margin-left: auto;
+    span {
+      font-weight: 800;
+    }
   }
 }
 

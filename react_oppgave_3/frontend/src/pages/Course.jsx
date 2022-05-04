@@ -3,17 +3,16 @@ import { Outlet, useParams } from 'react-router-dom'
 import LessonsElement from '../components/LessonsElement'
 import Title from '../components/Title'
 import { users } from '../data/data'
-import { NEWgetCourse } from '../lib/services/courseQuery'
+import { getCourse } from '../lib/services/courseQuery'
 
 export default function Course() {
-  // TODO: Add nøvendig logikk
   const { courseSlug, lessonSlug } = useParams()
   const [currentCourse, setCurrentCourse] = useState([])
   const [url, setUrl] = useState('/kurs/' + courseSlug)
 
   useEffect(() => {
     const getCourseData = async () => {
-      const course = await NEWgetCourse(courseSlug)
+      const course = await getCourse(courseSlug)
       setCurrentCourse(course)
     }
     getCourseData()
@@ -23,20 +22,8 @@ export default function Course() {
     setUrl()
   }
 
-  // // Lesson links
-  // const [active, setActive] = useState(false)
-  // const [testState, setTestState] = useState('')
-
-  // const handleClick = (e) => {
-  //   console.log(e.target.innerHTML)
-  //   const test = e.target.innerHTML
-  //   setTestState(e.target.innerHTML + " - aktive")
-  //   setActive(true);
-  // }
-
   // Leksjoner som blir vist på vestre siden på et kurs.
   const generateLessonsCard = currentCourse?.map((l, i) => (
-    // <LessonsElement key={i} url={url} handleUrl={handleUrl} l={l} handleClick={handleClick} active={active} testState={testState}/>
     <LessonsElement key={i} url={url} handleUrl={handleUrl} l={l} />
   ))
 
@@ -56,26 +43,20 @@ export default function Course() {
       <aside>
         <h3>Leksjoner</h3>
         <ul data-testid="lessons" className="lessons">
-          {/* TODO: Vis alle leksjoner til kurset */}
+          {/* Vis alle leksjoner til kurset */}
           {generateLessonsCard}
         </ul>
       </aside>
-      <section className='border-divider course-section' >
-        {/* TODO: START - Vis kun om vi er på /kurs/kurs-slug ikke når vi er på /kurs/kurs-slug/leksjons-slug */}
-
-        {/* TODO: SLUTT */}
-        {/* TODO: Vis leksjonens innhold her. HINT: Sjekk React Router Outlet */}
-        {/* Jalla hack?? */}
-        {lessonSlug === undefined
-        ? generateCourseContent
-        : null }
-        <Outlet/>
-
+      <section className="border-divider course-section">
+        {/* lessonslug er kun definert hvis man er inne på en leksjon, 
+        dvs. hvis man er på en kurs side så skal kun innhold fra et kurs vises. Ellers vil innhold fra leksjoner vises. */}
+        {lessonSlug === undefined ? generateCourseContent : null}
+        <Outlet />
       </section>
       <aside data-testid="enrollments">
         <h3>Deltakere</h3>
         <ul data-testid="course_enrollments">
-          {/* TODO: Vis alle deltakere (se mappen data) */}
+          {/* Vis alle deltakere, data hentet fra filen data. Kun statisk */}
           {generateEnrollments}
         </ul>
       </aside>
