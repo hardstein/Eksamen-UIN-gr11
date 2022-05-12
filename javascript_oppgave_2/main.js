@@ -5,40 +5,39 @@ const correctColor = "rgb(25, 232, 168)";
 const failText = "Feil";
 const correctText = "Ny runde";
 
-// const wordList = [
-//   "Huske",
-//   "Trene",
-//   "Danse",
-//   "Hoppe",
-//   "Sykle",
-//   "Gå",
-//   "Rulle",
-//   "Trille",
-//   "Kjøre",
-//   "Løpe",
-//   "Springe",
-//   "Hinke",
-//   "Sparke",
-//   "Sprinte",
-//   "Forflytte",
-//   "Trimme",
-//   "Løfte",
-//   "Snurre",
-//   "Svinge",
-//   "Svømme",
-//   "Flyte",
-//   "Fly",
-//   "Sveve",
-//   "Ake",
-//   "Dra",
-// ];
+const wordList = [
+  "Huske",
+  "Trene",
+  "Danse",
+  "Hoppe",
+  "Sykle",
+  "Gå",
+  "Rulle",
+  "Trille",
+  "Kjøre",
+  "Løpe",
+  "Springe",
+  "Hinke",
+  "Sparke",
+  "Sprinte",
+  "Forflytte",
+  "Trimme",
+  "Løfte",
+  "Snurre",
+  "Svinge",
+  "Svømme",
+  "Flyte",
+  "Fly",
+  "Sveve",
+  "Ake",
+  "Dra",
+];
 
-const wordList = ["a", "b", "c", "k", "z"];
+// const wordList = ["a", "b", "c", "k", "z"];
 
 // #### START HER ####
 // Kilde: https://stackoverflow.com/questions/7459704/in-javascript-what-is-the-best-way-to-convert-a-nodelist-to-an-array
 const inpText = Array.from(document.getElementsByTagName("input"));
-// const inpText = document.getElementsByTagName("input");
 const spans = document.getElementsByTagName("span");
 const btnTest = document.getElementById("test");
 
@@ -94,6 +93,14 @@ const validate = () => {
   const inpValues = new Array(4);
   let result = true;
 
+  const inputList = inpTextToArray.filter(val => val.value)
+
+  if (inputList.length < 4) {
+    console.log("Mangler input")
+    result = false
+    return wrong();
+  }
+
   for (let i = 0; i < inpTextToArray.length; i++) {
     if (inpTextToArray[i].value > 4) {
       console.log("TALLET MÅ VÆRE MINDRE");
@@ -111,13 +118,13 @@ const validate = () => {
     }
 
     inpValues.splice(inpTextToArray[i].value - 1, 1, fourWords[i]);
-    console.log(inpValues);
+    // console.log(inpValues);
+
   }
-  
   // Hvis ikke alle er rett
   // Kilde: https://masteringjs.io/tutorials/fundamentals/compare-arrays
   if (JSON.stringify(correctFourWords) != JSON.stringify(inpValues)) {
-    console.log("FEIL REKKEFØLGE");
+    console.log("FEIL REKKEFØLGE, SØRG FOR AT TALLENE ER FORSKJELLIGE");
     result = false;
   }
 
