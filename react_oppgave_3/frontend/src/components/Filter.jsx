@@ -16,6 +16,7 @@ function Filter({ handleOptions }) {
         data-testid="filter"
         onChange={handleOptions}
       >
+        <option value="">Alle</option>
         {generateFilterOptions}
         {/* {console.log(category)} */}
       </select>

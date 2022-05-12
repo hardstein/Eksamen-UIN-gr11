@@ -138,7 +138,6 @@ export const courseCreateSteps = [
 ]
 
 export const categories = [
-  'Alle', // Lagt til alle
   'Marketing',
   'Photoshop',
   'Code',

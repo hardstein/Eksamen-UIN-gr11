@@ -14,7 +14,7 @@ export default function Courses() {
     getCoursesData()
   }, [])
 
-  const [category, setCategory] = useState('alle')
+  const [category, setCategory] = useState('')
 
   // To lower fordi "courses" sin kategori er skrevet med liten bokstav.
   function handleOptions(e) {
@@ -34,7 +34,7 @@ export default function Courses() {
       </header>
       <section className="courses-list" data-testid="courses">
         {/* Vis alle kurs */}
-        {category === 'alle' ? (
+        {category === '' ? (
           courses.map((c, i) => <CourseCard key={i} c={c} />)
         ) : // Hvis empty er valgt, eller at det mangler kurs til valgt kategori.
         category === 'empty' || generateCourses.length === 0 ? (
