@@ -93,7 +93,7 @@ export default function App() {
 
   const [game, setGame] = useState(0)
 
-  const [bullsEye, setbullsEye] = useState({}) // Sjekk denne
+  const [bullsEye, setbullsEye] = useState([]) // Sjekk denne
 
   useEffect(() => {
     setbullsEye?.(createGame(game))
