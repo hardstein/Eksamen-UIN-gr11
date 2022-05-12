@@ -13,7 +13,6 @@ function Navbar() {
           >Mikro LMS</NavLink>
         </h1>
         <ul>
-          <li></li>
           <li>
             <NavLink to="/kurs"
             className={({ isActive }) => (isActive ? "active-link" : "not-active-link")}

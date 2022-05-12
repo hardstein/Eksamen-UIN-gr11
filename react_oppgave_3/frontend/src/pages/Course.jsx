@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Outlet, useParams } from 'react-router-dom'
-import LessonsElement from '../components/LessonsElement'
+import LessonLinks from '../components/LessonLinks'
 import Title from '../components/Title'
 import { users } from '../data/data'
 import { getCourse } from '../lib/services/courseQuery'
@@ -18,13 +18,13 @@ export default function Course() {
     getCourseData()
   }, [courseSlug])
 
-  const handleUrl = () => {
-    setUrl()
-  }
-
   // Leksjoner som blir vist på vestre siden på et kurs.
-  const generateLessonsCard = currentCourse?.map((l, i) => (
-    <LessonsElement key={i} url={url} handleUrl={handleUrl} l={l} />
+  const generateLessonLinks = currentCourse?.map((l, i) => (
+    <LessonLinks
+      key={i}
+      url={url}
+      l={l}
+    />
   ))
 
   // /kurs/kurs-slug
@@ -35,6 +35,7 @@ export default function Course() {
       <p data-testid="course_description">{c?.description}</p>
     </div>
   ))
+  
   // Liste over deltakere til et kurs, på høyre side.
   const generateEnrollments = users.map((u) => <li key={u?.name}>{u?.name}</li>)
 
@@ -43,8 +44,7 @@ export default function Course() {
       <aside>
         <h3>Leksjoner</h3>
         <ul data-testid="lessons" className="lessons">
-          {/* Vis alle leksjoner til kurset */}
-          {generateLessonsCard}
+          {generateLessonLinks}
         </ul>
       </aside>
       <section className="border-divider course-section">
@@ -56,7 +56,6 @@ export default function Course() {
       <aside data-testid="enrollments">
         <h3>Deltakere</h3>
         <ul data-testid="course_enrollments">
-          {/* Vis alle deltakere, data hentet fra filen data. Kun statisk */}
           {generateEnrollments}
         </ul>
       </aside>

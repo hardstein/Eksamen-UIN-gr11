@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
-import { deleteData } from '../lib/services/deleteGROQ'
 import { getLesson, getLessonComments } from '../lib/services/lessonQuery'
 import LessonComments from './LessonComments'
 import Title from './Title'
@@ -16,17 +15,9 @@ export default function Lesson() {
     const getLessonData = async () => {
       const lesson = await getLesson(lessonSlug)
       if (subscription) {
-        // console.log('lesson ', lesson)
         setCurrentLesson(lesson)
       }
     }
-
-    // // Sletter alle kommentarer. ----------
-    // const deleteComments = async () => {
-    //   await deleteData()
-    // }
-    // deleteComments()
-    // // ------------------------------------
 
     const getCommentsData = async () => {
       const commentsData = await getLessonComments(lessonSlug)
@@ -50,9 +41,7 @@ export default function Lesson() {
         {currentLesson.relatedCourse.map((relatedCourse) => (
           <div key={i} className="lesson-heading">
             <h3 data-testid="course_title">
-              <Link
-                to={'/kurs/' + relatedCourse?.slug}
-              >
+              <Link to={'/kurs/' + relatedCourse?.slug}>
                 Tilbake til {relatedCourse?.title}
               </Link>
             </h3>
@@ -70,7 +59,6 @@ export default function Lesson() {
         </p>
       ))}
       <LessonComments id={currentLesson?._id} comments={comments} />
-      
     </div>
   ))
 

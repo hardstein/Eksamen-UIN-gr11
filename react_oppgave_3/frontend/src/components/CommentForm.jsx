@@ -12,9 +12,6 @@ function CommentForm({ id, onSubmit, complete }) {
     setCreatedBy('')
     setComment('');
     setLessonRef(id)
-
-    // complete ? window.location.reload(false) : null
-  // }, [id, complete])
   }, [id])
 
   const handleSubmit = (e) => {
@@ -22,7 +19,6 @@ function CommentForm({ id, onSubmit, complete }) {
     if (createdBy === '' || comment === '') {
       setError(true)
     } else {
-      // TODO: legge til lesson i kommentar
       onSubmit({ createdBy, comment, lessonRef })
       // Reset
       setError(false)
@@ -67,9 +63,7 @@ function CommentForm({ id, onSubmit, complete }) {
       <button data-testid="form_submit" type="submit">
         Legg til kommentar
       </button>
-      {/* Vise ved feil */}
       {error ? <p data-testid="form_error" className="form-error">Fyll ut alle felter med *</p> : null}
-      {/* Vise ved suksess */}
       {/* Kunne fjerne "Skjema sendt" fordi det var tilstrekkelig med å kun se at en ny kommentar lagres. */}
       {/* {complete ? <p data-testid="form_success" className="form-success">Skjema sendt</p> : null} */}
     </form>

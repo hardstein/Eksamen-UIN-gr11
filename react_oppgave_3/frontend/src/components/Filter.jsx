@@ -18,7 +18,6 @@ function Filter({ handleOptions }) {
       >
         <option value="">Alle</option>
         {generateFilterOptions}
-        {/* {console.log(category)} */}
       </select>
     </label>
   )

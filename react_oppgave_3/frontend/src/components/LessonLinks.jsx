@@ -1,7 +1,6 @@
-import { Link, useParams} from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 
-// function LessonsElement({ url, l, handleClick, active, testState }) {
-function LessonsElement({ url, l }) {
+function LessonLinks({ url, l }) {
   const names = l.lessonName
   const slugs = l.lessonSlug
   const { lessonSlug } = useParams()
@@ -12,14 +11,13 @@ function LessonsElement({ url, l }) {
 
   // NB: l og le
   const generate = names?.map((le, i) => (
-    <li key={i}
-    className={slugs[i] === lessonSlug ? "active-lesson" : null}
-    >
+    <li key={i} className={slugs[i] === lessonSlug ? 'active-lesson' : null}>
       <Link
         data-testid="lesson_url"
         data-slug="Dynamisk verdi"
         // Fikk ideen til å bruke slugs[i] her fra koden over som er kommentert ut.
         to={url + '/' + slugs[i]}
+        onClick={() => console.log('Hei', le)}
       >
         {le}
       </Link>
@@ -29,4 +27,4 @@ function LessonsElement({ url, l }) {
   return <>{generate}</>
 }
 
-export default LessonsElement
+export default LessonLinks
