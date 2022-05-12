@@ -21,7 +21,7 @@ function LessonsElement({ url, l }) {
         // Fikk ideen til å bruke slugs[i] her fra koden over som er kommentert ut.
         to={url + '/' + slugs[i]}
       >
-        {slugs[i] === lessonSlug ? le + " - aktiv " : le}
+        {le}
       </Link>
     </li>
   ))
