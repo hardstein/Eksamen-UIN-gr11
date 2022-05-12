@@ -24,5 +24,3 @@ export default function Flavours({ flavourList, handleFlavourChange }) {
     </section>
   )
 }
-
-//  `data-testid` skal ha samme verdi som før - OK, men må denne i hovedlisten?

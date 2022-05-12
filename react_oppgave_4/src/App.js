@@ -93,13 +93,13 @@ export default function App() {
 
   const [game, setGame] = useState(0)
 
-  const [bullsEye, setbullsEye] = useState([]) // Sjekk denne
+  const [bullsEye, setbullsEye] = useState([])
+
+  const [gamePoints, setGamePoints] = useState(0)
 
   useEffect(() => {
     setbullsEye?.(createGame(game))
   }, [game])
-
-  const [gamePoints, setGamePoints] = useState(0)
 
   const handleClick = (event) => {
     const points = event.target.value
