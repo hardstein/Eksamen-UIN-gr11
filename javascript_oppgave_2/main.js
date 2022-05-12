@@ -1,5 +1,3 @@
-// Start koding lengre ned (ved startHere)
-
 const failColor = "rgb(226, 101, 91)";
 const correctColor = "rgb(25, 232, 168)";
 const failText = "Feil";
@@ -33,9 +31,7 @@ const wordList = [
   "Dra",
 ];
 
-// const wordList = ["a", "b", "c", "k", "z"];
-
-// #### START HER ####
+// Gjøre om til array
 // Kilde: https://stackoverflow.com/questions/7459704/in-javascript-what-is-the-best-way-to-convert-a-nodelist-to-an-array
 const inpText = Array.from(document.getElementsByTagName("input"));
 const spans = document.getElementsByTagName("span");
@@ -118,9 +114,9 @@ const validate = () => {
     }
 
     inpValues.splice(inpTextToArray[i].value - 1, 1, fourWords[i]);
-    // console.log(inpValues);
+
   }
-  // Hvis ikke alle er rett
+  // Hvis ikke alle er rett, sammenlikne
   // Kilde: https://masteringjs.io/tutorials/fundamentals/compare-arrays
   if (JSON.stringify(correctFourWords) != JSON.stringify(inpValues)) {
     console.log("FEIL REKKEFØLGE, SØRG FOR AT TALLENE ER FORSKJELLIGE");
