@@ -93,11 +93,11 @@ const validate = () => {
   const inpValues = new Array(4);
   let result = true;
 
-  const inputList = inpTextToArray.filter(val => val.value)
+  const inputList = inpTextToArray.filter((val) => val.value);
 
   if (inputList.length < 4) {
-    console.log("Mangler input")
-    result = false
+    console.log("Mangler input");
+    result = false;
     return wrong();
   }
 
@@ -119,7 +119,6 @@ const validate = () => {
 
     inpValues.splice(inpTextToArray[i].value - 1, 1, fourWords[i]);
     // console.log(inpValues);
-
   }
   // Hvis ikke alle er rett
   // Kilde: https://masteringjs.io/tutorials/fundamentals/compare-arrays
