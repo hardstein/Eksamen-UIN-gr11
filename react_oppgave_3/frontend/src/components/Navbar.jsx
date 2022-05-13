@@ -7,19 +7,21 @@ function Navbar() {
   return (
     <header className='layout'>
       <nav>
-        <h1>
+        <h1 data-testid="logo">
           <NavLink to="/"
           className={({ isActive }) => (isActive ? "active-link" : "not-active-link")}
           >Mikro LMS</NavLink>
         </h1>
-        <ul>
+        <ul data-testid="nav">
           <li>
             <NavLink to="/kurs"
+            data-testid="nav_courses"
             className={({ isActive }) => (isActive ? "active-link" : "not-active-link")}
             >Kurs</NavLink>
           </li>
           <li>
             <NavLink to="/ny"
+            data-testid="nav_new"
             className={({ isActive }) => (isActive ? "active-link" : "not-active-link")}
             >Nytt kurs</NavLink>
           </li>

@@ -1,6 +1,5 @@
 import { Route, Routes } from 'react-router-dom'
 import Lesson from '../components/Lesson'
-
 import Layout from '../layout/Layout'
 import Course from '../pages/Course'
 import Courses from '../pages/Courses'
@@ -12,7 +11,6 @@ function RouterPage() {
     <Routes>
       <Route element={<Layout />}>
         <Route index element={<SignUp />} />
-        {/* <Route path="kurs" element={<Courses />}> */}
         <Route path="kurs">
           <Route index element={<Courses />} />
           <Route path=":courseSlug" element={<Course />}>

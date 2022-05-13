@@ -17,7 +17,6 @@ function LessonLinks({ url, l }) {
         data-slug="Dynamisk verdi"
         // Fikk ideen til å bruke slugs[i] her fra koden over som er kommentert ut.
         to={url + '/' + slugs[i]}
-        onClick={() => console.log('Hei', le)}
       >
         {le}
       </Link>
