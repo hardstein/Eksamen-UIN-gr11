@@ -119,7 +119,7 @@ const validate = () => {
   // Hvis ikke alle er rett, sammenlikne
   // Kilde: https://masteringjs.io/tutorials/fundamentals/compare-arrays
   if (JSON.stringify(correctFourWords) != JSON.stringify(inpValues)) {
-    console.log("FEIL REKKEFØLGE, SØRG FOR AT TALLENE ER FORSKJELLIGE");
+    console.log("BRUK TALL FRA 1-4, FEIL REKKEFØLGE");
     result = false;
   }
 
